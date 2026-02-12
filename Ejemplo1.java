@@ -53,13 +53,6 @@ public class Ejemplo1{
         //leer posicion y valor y asignarolo
         InputStreamReader reader=new InputStreamReader(System.in); 
         BufferedReader Input=new BufferedReader (reader); 
-        
-        
-        //ver si el vector esta ordenado
-    
-    
-    
-    
     }
 
 }
