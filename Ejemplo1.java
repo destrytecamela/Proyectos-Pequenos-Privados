@@ -51,8 +51,8 @@ public class Ejemplo1{
         System.out.println("el mayor es: "+may+" se repite: "+rep+" veces");
         
         //leer posicion y valor y asignarolo
-        InputStreamReader reader=new InputStreamReader(System.in); 
-        BufferedReader Input=new BufferedReader (reader); 
+       // InputStreamReader reader=new InputStreamReader(System.in); 
+       // BufferedReader Input=new BufferedReader (reader); 
     }
 
 }
