@@ -48,6 +48,29 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         for (int y =0; y < v.length;y++){ //se recorre el array desde la posición 0 hasta la posición v.length-1
         System.out.print(v[y] + " "); //se muestra el elemento del array en la posición y seguido de un espacio
         }
+        //inicializar un array con números aleatorios
+        Random rnd = new Random(); //se crea un objeto de la clase Random para generar números aleatorios
+        for (int i=0;i<v.length;i++){ //se recorre el array desde la posición 0 hasta la posición v.length-1
+        v[i] = rnd.nextInt(10); //se asigna a la posición i del array un número aleatorio entre 0 y 9 (10 no incluido)
+        }
+        //contar pares en un array
+        int x = 0; //se declara la variable x para contar el número de pares
+        for(int i = 0;i<v.length;i++){ //se recorre el array desde la posición 0 hasta la posición v.length-1
+        if(v[i]%2==0){ //se verifica si el elemento en la posición i es par (si el resto de dividirlo entre 2 es 0)
+        x++; //si es par, se incrementa el contador x en 1
+            }
+        }
+        System.out.println("Número de pares: " + x); //se muestra el número de pares encontrados en el array
+
+        //leer posicion y valor y asignarlo a un array
+        System.out.print("Introduce la posición: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        String s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        int pos=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable pos
+        System.out.print("Introduce el valor: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        int val=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable val
+        v[pos]=val; //se asigna el valor val a la posición pos del array    
+
         //------------------------------------------------------------------------
         
         //1ºEjemplo
