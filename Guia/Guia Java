@@ -1,0 +1,70 @@
+import java.io.*;   
+import java.util.Scanner;
+public class Prueba{
+
+    public static void main (String[] args)  throws IOException    {    
+       
+       /*
+       Para leer por teclado se puede usar dos opciones. 
+            - Reader: Siempre se debe leer una cadena (String) y luego convertir a entero o al tipo que sea. 
+            - Scanner: Con esta opción se lee directamente el tipo pero no siempre funciona en campusvirtual
+       */
+       
+       
+        //Leer mediante Reader
+	    InputStreamReader reader=new InputStreamReader(System.in); 
+        BufferedReader Input=new BufferedReader (reader); 
+        System.out.print("Introduzca la edad: ");
+        String s=Input.readLine();
+        x=Integer.parseInt(s); //Convertir de cadena a int
+        
+        
+         // Leer mediante Scanner
+          Scanner in = new Scanner (System.in) ; //Otro mecanismo de lectura
+          //Leer cadenas
+          String s= int.nextLine();
+          //Leer enteros
+          x= in.nextInt();
+          System.out.println(x);
+        
+        
+        //------------------------------------------------------------------------
+        
+        //1ºEjemplo
+        int x=0;
+         String s=Input.readLine();
+        x=Integer.parseInt(s); //Convertir de cadena a int
+        if(x<0){System.out.println("negativo");}
+        if(x<=12){System.out.println("Niño");}
+        if(x>12 && x<18){System.out.println("Adolescente");}
+        */
+        //------------------------------------------------------------------------
+        
+        //2ºEjemplo
+        int x=0;
+        int m=0;
+        int y=0;
+        int z=0;
+        
+        System.out.print("Introduce un entero: ");
+         String s=Input.readLine();
+        x=Integer.parseInt(s); //Convertir de cadena a int
+        System.out.print("Introduce un entero: ");
+         String h=Input.readLine();
+        y=Integer.parseInt(h); //Convertir de cadena a int
+        System.out.print("Introduce un entero: ");
+         String i=Input.readLine();
+        z=Integer.parseInt(i); //Convertir de cadena a int
+        
+        if(x>m){
+            m=x;}
+        if(y>m){
+            m=y;}
+        if(z>m){
+            m=z;}
+
+        System.out.print("El mayor es: " + m);
+        
+        //----------------------------------------------------------------------------------------------
+    }
+}
