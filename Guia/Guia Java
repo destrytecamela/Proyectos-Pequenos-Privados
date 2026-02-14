@@ -36,6 +36,18 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         x=x - 273.15f; //cuando se opera con un número decimal se debe indicar que el número es decimal con la letra f (float) al final
         DecimalFormat df=new DecimalFormat("0.00"); //se crea un objeto de la clase DecimalFormat para formatear el número con dos decimales
         System.out.println("x en C: " + df.format(x)); //se muestra el número formateado con dos decimales
+
+        //crear numero aleatorio
+        Random rnd = new Random(); //se crea un objeto de la clase Random para generar números aleatorios
+        int n = rnd.nextInt(10); //se genera un número aleatorio entre 0 y 9 (10 no incluido) y se almacena en la variable n
+         int n = rnd.nextInt(100) + 1; //se genera un número aleatorio entre 1 y 100 (100 incluido) y se almacena en la variable n
+
+         //crear un array
+         int []v=new int[10]; //se declara un array de enteros llamado v con capacidad para 10 elementos
+         //mostrar un array 
+        for (int y =0; y < v.length;y++){ //se recorre el array desde la posición 0 hasta la posición v.length-1
+        System.out.print(v[y] + " "); //se muestra el elemento del array en la posición y seguido de un espacio
+        }
         //------------------------------------------------------------------------
         
         //1ºEjemplo
