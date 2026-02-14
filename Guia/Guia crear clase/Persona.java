@@ -1,4 +1,4 @@
-package Guia;
+
 
 public class Persona {
     // Tabla de letras para calcular la letra del DNI

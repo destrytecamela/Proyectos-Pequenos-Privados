@@ -1,5 +1,8 @@
+
+
 import java.util.Scanner;
 
+public class PersonaMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         
@@ -26,3 +29,4 @@ import java.util.Scanner;
         
         scanner.close();
     }
+}
