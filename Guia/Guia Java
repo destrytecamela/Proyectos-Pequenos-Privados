@@ -146,6 +146,40 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
 
     //----------------------------------------------------------------------------------------------
     
-    //
+    //Ejemplo 5 (Evaluable 3)
+     InputStreamReader reader = new InputStreamReader(System.in);
+        BufferedReader Input = new BufferedReader(reader);
+        String s =Input.readLine();
+        int n=Integer.parseInt(s);
+        if(n<=0){System.out.println("error");}
+        else{
+            s=Input.readLine();
+            int u=Integer.parseInt(s);
+            if(u<0){System.out.println("error");}
+            else{
+                int max = 0;
+                int min = 99999999;
+                int suma = 0;
+                int umbral=0;
+                int media=0;
+                for(int x =0 ; x<n;x++){
+                    s=Input.readLine();
+                    int p=Integer.parseInt(s);
+                    if(p<0){System.out.println("error");return;}
+                    
+                    if(p>max){max=p;}
+                    if(p<min){min=p;}
+                    suma=suma+p; //suma de todas las potencias
+                    if(p>u){umbral++;}
+            
+                }
+                media=suma/n; //media
+                System.out.println("Máxima: "+max);
+                System.out.println("Mínima: "+min);
+                System.out.println("Media: "+ media);
+                System.out.println("Superan el umbral: " + umbral);
+            }
+        }
+        
     }
 }
