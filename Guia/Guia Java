@@ -1,8 +1,11 @@
-import java.io.*;   
-import java.util.Scanner;
-public class Prueba{
+import java.io.*; //se importan las clases necesarias para leer por teclado y manejar excepciones
+import java.util.Scanner; //se importa la clase Scanner para leer por teclado cuando se use esa opción
+import java.util.Random; //se importa la clase Random para generar números aleatorios
+import java.text.DecimalFormat; //se importa la clase DecimalFormat para formatear números decimales
 
-    public static void main (String[] args)  throws IOException    {    
+public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main, Ejemplo, etc.
+
+    public static void main (String[] args)  throws IOException    {    //se declara el método main que puede lanzar una excepción de tipo IOException al leer por teclado
        
        /*
        Para leer por teclado se puede usar dos opciones. 
@@ -12,22 +15,27 @@ public class Prueba{
        
        
         //Leer mediante Reader
-	    InputStreamReader reader=new InputStreamReader(System.in); 
-        BufferedReader Input=new BufferedReader (reader); 
-        System.out.print("Introduzca la edad: ");
-        String s=Input.readLine();
-        x=Integer.parseInt(s); //Convertir de cadena a int
+	    InputStreamReader reader=new InputStreamReader(System.in); //se crea un objeto de la clase InputStreamReader para leer por teclado
+        BufferedReader Input=new BufferedReader (reader); //se crea un objeto de la clase BufferedReader para leer por teclado de forma más eficiente
+        System.out.print("Introduzca la edad: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        String s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        x=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable x
         
         
          // Leer mediante Scanner
           Scanner in = new Scanner (System.in) ; //Otro mecanismo de lectura
           //Leer cadenas
-          String s= int.nextLine();
+          String s= int.nextLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+          System.out.println(s); //se muestra la cadena leída por teclado
           //Leer enteros
-          x= in.nextInt();
-          System.out.println(x);
+          x= in.nextInt(); //se lee un número entero por teclado y se almacena en la variable x
+          System.out.println(x); //se muestra el número entero leído por teclado
         
-        
+        //Forzar a que el número tenga dos decimales
+        float x = 0; //se declara la variable x como decimal (float)
+        x=x - 273.15f; //cuando se opera con un número decimal se debe indicar que el número es decimal con la letra f (float) al final
+        DecimalFormat df=new DecimalFormat("0.00"); //se crea un objeto de la clase DecimalFormat para formatear el número con dos decimales
+        System.out.println("x en C: " + df.format(x)); //se muestra el número formateado con dos decimales
         //------------------------------------------------------------------------
         
         //1ºEjemplo
@@ -66,5 +74,78 @@ public class Prueba{
         System.out.print("El mayor es: " + m);
         
         //----------------------------------------------------------------------------------------------
+
+        //Ejemplo 3 (Evaluable 1)
+         InputStreamReader reader=new InputStreamReader(System.in);
+        BufferedReader Input=new BufferedReader (reader);
+        
+        String nom=Input.readLine();
+        String eda=Input.readLine();
+        int edad=Integer.parseInt(eda);
+        String num=Input.readLine();
+        int numero=Integer.parseInt(num);
+        String tem=Input.readLine();
+        float temperatura=Float.parseFloat(tem);
+        
+        System.out.println("Hola, "+nom+"!");
+        if(edad<0){System.out.println("edad negativa");}
+        if(edad<18){System.out.println("Menor de edad");}
+        else{System.out.println("Mayor de edad");}
+        if(numero%2==0){System.out.println("Par");}
+        else{System.out.println("Impar");}
+        
+        temperatura=temperatura - 273.15f; //aqui se convierte la temperatura de Kelvin a Celsius restando 273.15 al valor de temperatura, y se indica que el número es decimal con la letra f (float) al final para que la operación se realice correctamente
+        DecimalFormat df=new DecimalFormat("0.00"); //se crea un objeto de la clase DecimalFormat para formatear el número con dos decimales
+        System.out.println("Temperatura en C: " + df.format(temperatura)); //se muestra la temperatura formateada con dos decimales
+        
+        //----------------------------------------------------------------------------------------------
+
+        //Ejemplo 4 (Evaluable 2)
+         InputStreamReader reader=new InputStreamReader(System.in);
+    BufferedReader Input=new BufferedReader (reader);
+    int venta = 0;
+    int Re = 0;
+    int Bo = 0;
+    int Du = 0;
+    int ttv = 0;
+   
+    String x=Input.readLine();
+    int decision = Integer.parseInt(x);
+    while(decision==1 || decision== 2 || decision==3){
+     if(decision==1){
+         Re=Re+1;
+         ttv=ttv+1;
+         venta=venta+2;
+     }  
+     if(decision==2){
+         Bo=Bo+1;
+         ttv=ttv+1;
+         venta=venta+5;
+     }  
+     if(decision==3){
+         Du=Du+1;
+         ttv=ttv+1;
+         venta=venta+1;
+     }  
+       
+       
+    x=Input.readLine();
+    decision = Integer.parseInt(x);
+    }
+    if(decision==-1){
+        System.out.println("Total ventas: " + ttv);
+        System.out.println("Refrescos: " + Re);
+        System.out.println("Bocadillos: " + Bo);
+        System.out.println("Dulces: " + Du);
+        System.out.println("Ingresos: " + venta);
+    }
+    else{
+        System.out.println("error");
+        decision=-1;
+    }
+
+    //----------------------------------------------------------------------------------------------
+    
+    //
     }
 }
