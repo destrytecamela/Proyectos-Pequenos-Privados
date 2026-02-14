@@ -70,7 +70,8 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
         int val=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable val
         v[pos]=val; //se asigna el valor val a la posición pos del array    
-
+        //crear una clase con atributos y métodos
+        //los archivos Persona.java y PersonaMain.java son un ejemplo de esto, donde se define una clase Persona con atributos como nombre, apellidos, dni y edad, y métodos para obtener el nombre completo, verificar si la edad es par y calcular la letra del DNI. Luego, en el archivo PersonaMain.java se crea un objeto de la clase Persona, se le asignan valores a sus atributos mediante la lectura por teclado, y se llaman a los métodos para mostrar los resultados.
         //------------------------------------------------------------------------
         
         //1ºEjemplo
