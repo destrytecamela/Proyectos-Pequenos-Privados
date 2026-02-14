@@ -51,8 +51,13 @@ public class Ejemplo1{
         System.out.println("el mayor es: "+may+" se repite: "+rep+" veces");
         
         //leer posicion y valor y asignarolo
-       // InputStreamReader reader=new InputStreamReader(System.in); 
-       // BufferedReader Input=new BufferedReader (reader); 
+        System.out.print("Introduce la posición: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        String s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        int pos=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable pos
+        System.out.print("Introduce el valor: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        int val=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable val
+        v[pos]=val; //se asigna el valor val a la posición pos del array    
     }
 
 }
