@@ -2,7 +2,7 @@
 
 public class Persona {
     // Tabla de letras para calcular la letra del DNI
-    private static final char[] TABLA_LETRAS_DNI = {
+    char[] TABLA_LETRAS_DNI = {
         'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 
         'X', 'B', 'N', 'J', 'Z', 'S', 'Q', 'V', 'H', 'L', 
         'C', 'K', 'E'
