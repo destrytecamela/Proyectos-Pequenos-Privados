@@ -2,6 +2,8 @@ import java.util.Random;
 import java.io.*;
 
 public class Utilvector{
+    InputStreamReader reader=new InputStreamReader(System.in); //se crea un objeto de la clase InputStreamReader para leer por teclado
+        BufferedReader Input=new BufferedReader (reader); //se crea un objeto de la clase BufferedReader para leer por teclado de forma más eficiente
     //atributo
     private int []v;
     //metodos - procedimientos - vectores

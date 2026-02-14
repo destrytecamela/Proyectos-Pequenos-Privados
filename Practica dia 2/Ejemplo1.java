@@ -3,6 +3,8 @@ import java.io.*;
 
 public class Ejemplo1{
     public static void main(String[] args) throws IOException{
+        InputStreamReader reader=new InputStreamReader(System.in); //se crea un objeto de la clase InputStreamReader para leer por teclado
+        BufferedReader Input=new BufferedReader (reader); //se crea un objeto de la clase BufferedReader para leer por teclado de forma más eficiente
    
         //Definir un array
         int []v=new int[10];
