@@ -72,6 +72,32 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         v[pos]=val; //se asigna el valor val a la posición pos del array    
         //crear una clase con atributos y métodos
         //los archivos Persona.java y PersonaMain.java son un ejemplo de esto, donde se define una clase Persona con atributos como nombre, apellidos, dni y edad, y métodos para obtener el nombre completo, verificar si la edad es par y calcular la letra del DNI. Luego, en el archivo PersonaMain.java se crea un objeto de la clase Persona, se le asignan valores a sus atributos mediante la lectura por teclado, y se llaman a los métodos para mostrar los resultados.
+        
+        //Crear un menú con opciones
+            System.out.println("Menú de opciones:"); //se muestra un mensaje para que el usuario sepa qué opciones tiene    
+        System.out.println("1. Opción 1"); //se muestra la opción 1
+        System.out.println("2. Opción 2"); //se muestra la opción 2
+        System.out.println("3. Opción 3"); //se muestra la opción 3
+        System.out.print("Introduce una opción: "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        String s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        int opcion=Integer.parseInt(s); //se convierte la cadena s a un número entero y se almacena en la variable opcion
+        switch(opcion){ //se evalúa la variable opcion para ejecutar el bloque de código correspondiente
+            case 1: //si opcion es 1
+                System.out.println("Has elegido la opción 1"); //se muestra un mensaje indicando que se ha elegido la opción 1
+                break; //se sale del switch
+            case 2: //si opcion es 2
+                System.out.println("Has elegido la opción 2"); //se muestra un mensaje indicando que se ha elegido la opción 2
+                break; //se sale del switch
+            case 3: //si opcion es 3
+                System.out.println("Has elegido la opción 3"); //se muestra un mensaje indicando que se ha elegido la opción 3
+                break; //se sale del switch
+            default: //si opcion no es ninguna de las anteriores
+                System.out.println("Opción no válida"); //se muestra un mensaje indicando que la opción no es válida
+        }
+        
+        
+        
+        
         //------------------------------------------------------------------------
         
         //1ºEjemplo
