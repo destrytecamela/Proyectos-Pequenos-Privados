@@ -80,8 +80,8 @@ public boolean retirar(float cantidad){
     if(cantidad <0 || cantidad > saldo){ return false;}
     else{
     Movimiento m=new Movimiento(cantidad,1);
-    boolean anadido=anadirMovimiento(m);
-    if(anadido){
+    boolean retirado=anadirMovimiento(m);
+    if(retirado){
     saldo= saldo -  cantidad;
     return true;
     }
