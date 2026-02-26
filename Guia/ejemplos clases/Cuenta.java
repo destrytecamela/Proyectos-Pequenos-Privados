@@ -49,7 +49,44 @@ public void setMovs(Movimiento[] m) {
 public String toString() {
     return "Cuenta{numero=" + numero + ", saldo=" + saldo + ", titular=" + titular + "}";
 } 
+//Métodos adicionales
+public boolean anadirMovimiento(Movimiento m){
+    boolean b = true;
+    for (int i = 0; i < movs.length; i++) {
+        if (movs[i] == null) { // Encuentra la primera posición vacía
+            movs[i] = m; 
+            b=true;
+            break; 
+        }
+        b=false;
+    }
+    return b;
+}
 
+public boolean ingresar(float cantidad){
+    if(cantidad <0){ return false;}
+    else{
+    Movimiento m=new Movimiento(cantidad,0);
+    boolean anadido=anadirMovimiento(m);
+    if(anadido){
+    saldo= saldo +  cantidad;
+    return true;
+    }
+    else{return false;}
+    }
+}
+
+public boolean retirar(float cantidad){
+    if(cantidad <0 || cantidad > saldo){ return false;}
+    else{
+    Movimiento m=new Movimiento(cantidad,1);
+    boolean anadido=anadirMovimiento(m);
+    if(anadido){
+    saldo= saldo -  cantidad;
+    return true;
+    }
+    else{return false;}
+    }
 
 
 
