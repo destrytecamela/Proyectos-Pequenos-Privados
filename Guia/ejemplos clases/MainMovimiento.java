@@ -28,14 +28,13 @@ public class MainMovimiento
        historico[3] = new Movimiento(20.00f ,1 );
        historico[4] = new Movimiento(10.00f , 0);
        System.out.println("\nListado de histórico de movimientos:");
-       for (int i = 0; i < historico.length; i++) {
-           Movimiento m = historico[i];
+       for(Movimiento m : historico) {
            System.out.println(m.toString());
        }
        // 4) Cálculo simple: total ingresado y total retirado
        double totalIngresos = 0.0;
        double totalRetiros = 0.0;
-       for (int i = 0; i < historico.length; i++) {
+       for(int i = 0; i < historico.length; i++) {
            Movimiento m = historico[i];
            if (m.getTipos() == 0) totalIngresos += m.getCantidad();
            else totalRetiros += m.getCantidad();

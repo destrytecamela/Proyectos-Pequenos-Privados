@@ -46,8 +46,9 @@ public void setMovs(Movimiento[] m) {
     movs = m;
 }
 //toString
+@Override
 public String toString() {
-    return "Cuenta{numero=" + numero + ", saldo=" + saldo + ", titular=" + titular + "}";
+    return "Cuenta[numero=" + numero + ", saldo=" + saldo + ", titular=" + titular.getNombre() + "]";
 } 
 //Métodos adicionales
 public boolean anadirMovimiento(Movimiento m){
@@ -88,17 +89,5 @@ public boolean retirar(float cantidad){
     else{return false;}
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 }
