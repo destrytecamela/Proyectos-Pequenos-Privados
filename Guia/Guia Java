@@ -2,7 +2,8 @@ import java.io.*; //se importan las clases necesarias para leer por teclado y ma
 import java.util.Scanner; //se importa la clase Scanner para leer por teclado cuando se use esa opción
 import java.util.Random; //se importa la clase Random para generar números aleatorios
 import java.text.DecimalFormat; //se importa la clase DecimalFormat para formatear números decimales
-
+import java.time.LocalDate; //se importa la clase LocalDate para manejar fechas
+import java.time.format.DateTimeFormatter; //se importa la clase DateTimeFormatter para formatear fechas
 public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main, Ejemplo, etc.
 
     public static void main (String[] args)  throws IOException    {    //se declara el método main que puede lanzar una excepción de tipo IOException al leer por teclado
@@ -95,8 +96,18 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
                 System.out.println("Opción no válida"); //se muestra un mensaje indicando que la opción no es válida
         }
         
-        
-        
+        //poner fecha actual
+        LocalDate fechaActual = LocalDate.now(); //se obtiene la fecha actual y se almacena en la variable fechaActual
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //se crea un objeto de la clase DateTimeFormatter para formatear la fecha en el formato día/mes/año
+        String fechaFormateada = fechaActual.format(formato); //se formatea la fecha actual utilizando el formato definido y se almacena en la variable fechaFormateada
+        System.out.println("Fecha actual: " + fechaFormateada); //se muestra la fecha actual formateada
+
+        //poner fecha introducida por teclado
+        System.out.print("Introduce una fecha (dd/MM/yyyy): "); //se muestra un mensaje para que el usuario sepa qué debe introducir
+        String s=Input.readLine(); //se lee una línea de texto por teclado y se almacena en la variable s
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy"); //se crea    un objeto de la clase DateTimeFormatter para formatear la fecha en el formato día/mes/año
+        LocalDate fechaIntroducida = LocalDate.parse(s, formato); //se convierte la cadena s a un objeto de tipo LocalDate utilizando el formato definido y se almacena en la variable fechaIntroducida
+        System.out.println("Fecha introducida: " + fechaIntroducida.format(formato)); //se muestra la fecha introducida formateada
         
         //------------------------------------------------------------------------
         
