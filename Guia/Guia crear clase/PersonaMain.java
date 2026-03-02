@@ -2,6 +2,8 @@
 
 import java.util.Scanner;
 
+import Cuenta.Persona;
+
 public class PersonaMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
