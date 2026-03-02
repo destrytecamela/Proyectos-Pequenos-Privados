@@ -1,4 +1,3 @@
-package Cuenta;
 public class Cuenta {
 private long numero;
 private double saldo;
@@ -53,16 +52,13 @@ public String toString() {
 } 
 //Métodos adicionales
 public boolean anadirMovimiento(Movimiento m){
-    boolean b = true;
     for (int i = 0; i < movs.length; i++) {
         if (movs[i] == null) { // Encuentra la primera posición vacía
             movs[i] = m; 
-            b=true;
-            break; 
+            return true;
         }
-        b=false;
     }
-    return b;
+    return false;
 }
 
 public boolean ingresar(float cantidad){

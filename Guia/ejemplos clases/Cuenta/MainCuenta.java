@@ -1,5 +1,3 @@
-package Cuenta;
-
 public class MainCuenta {
     //main
     public static void main(String[] args) {

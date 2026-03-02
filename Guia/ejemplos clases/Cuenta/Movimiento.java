@@ -1,4 +1,4 @@
-package Cuenta;
+
 import java.time.*;
 
 /**
@@ -55,6 +55,7 @@ public void setFecha(LocalDate f){
     fecha=f;
 }
 //toString
+@Override
 public String toString(){
     return "Movimiento: " + cantidad + " euros, tipo: " + tipos + ", fecha: " + fecha;
 }

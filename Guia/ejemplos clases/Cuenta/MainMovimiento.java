@@ -1,4 +1,3 @@
-package Cuenta;
 /**
  * Write a description of class MainMovimiento here.
  * 
@@ -35,8 +34,7 @@ public class MainMovimiento
        // 4) Cálculo simple: total ingresado y total retirado
        double totalIngresos = 0.0;
        double totalRetiros = 0.0;
-       for(int i = 0; i < historico.length; i++) {
-           Movimiento m = historico[i];
+       for(Movimiento m : historico) {
            if (m.getTipos() == 0) totalIngresos += m.getCantidad();
            else totalRetiros += m.getCantidad();
        }

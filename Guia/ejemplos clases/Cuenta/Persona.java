@@ -1,4 +1,4 @@
-package Cuenta;
+
 /**
  * Representa una persona con nombre, DNI y edad.Esta clase proporciona constructores para inicializar los datos básicos,
  * así como métodos de acceso (getters/setters) y utilidades comunes como
@@ -125,5 +125,26 @@ public class Persona {
      * @param o el objeto a comparar
      * @return true si son iguales y false en caso contario
      */
-     
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; // Mismo objeto
+        if (o == null || getClass() != o.getClass()) return false; // No es una Persona
+        Persona persona = (Persona) o; // Cast seguro
+        return dni == persona.dni && nombre.equals(persona.nombre); // Comparar por nombre y DNI
+    }
+
+    /**
+     * Devuelve el código hash de la persona basado en nombre y DNI.
+     * @return código hash consistente con equals()
+     */
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(nombre, dni);
+    }
+
+    public boolean esEdadPar() {
+        return edad % 2 == 0;
+    }   
+
+
 }
