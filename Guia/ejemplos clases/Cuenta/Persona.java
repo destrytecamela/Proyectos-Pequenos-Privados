@@ -1,4 +1,3 @@
-
 /**
  * Representa una persona con nombre, DNI y edad.Esta clase proporciona constructores para inicializar los datos básicos,
  * así como métodos de acceso (getters/setters) y utilidades comunes como

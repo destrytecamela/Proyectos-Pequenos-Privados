@@ -1,3 +1,6 @@
+package Cuenta;
+
+import Cuenta.Persona;
 public class Cuenta {
 private long numero;
 private double saldo;

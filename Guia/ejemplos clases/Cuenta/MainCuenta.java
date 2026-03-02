@@ -1,3 +1,6 @@
+package ejemplos.clases.Cuenta;
+import Cuenta.Cuenta;
+
 public class MainCuenta {
     //main
     public static void main(String[] args) {
