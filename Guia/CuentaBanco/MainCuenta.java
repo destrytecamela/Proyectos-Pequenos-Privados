@@ -1,3 +1,5 @@
+import java.io.*;
+
 /**
  * Ejemplo de clase Cuenta con un titular.
  * 
@@ -7,7 +9,7 @@
 
 public class MainCuenta {
     //main
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // Crear una cuenta con un titular
         TitularCuenta titular = new TitularCuenta("Carlos", 12345678, 19);
         Cuenta cuenta = new Cuenta(1001, 0.0, titular);

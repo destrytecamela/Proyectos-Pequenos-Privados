@@ -1,6 +1,6 @@
 
 
-public class Persona1 {
+public class Persona {
     // Tabla de letras para calcular la letra del DNI
     char[] TABLA_LETRAS_DNI = {
         'T', 'R', 'W', 'A', 'G', 'M', 'Y', 'F', 'P', 'D', 
@@ -15,7 +15,7 @@ public class Persona1 {
     private int edad;
     
     // Constructor por defecto
-    public Persona1() {
+    public Persona() {
         this.nombre = "";
         this.apellidos = "";
         this.dni = 0;
@@ -23,7 +23,7 @@ public class Persona1 {
     }
     
     // Constructor con parámetros
-    public Persona1(String nombre, String apellidos, int dni, int edad) {
+    public Persona(String nombre, String apellidos, int dni, int edad) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.dni = dni;
