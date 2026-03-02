@@ -1,11 +1,15 @@
-package ejemplos.clases.Cuenta;
-import Cuenta.Cuenta;
+/**
+ * Ejemplo de clase Cuenta con un titular.
+ * 
+ * @author EDI
+ * @version 1.0
+ */
 
 public class MainCuenta {
     //main
     public static void main(String[] args) {
         // Crear una cuenta con un titular
-        Persona titular = new Persona("Carlos", 12345678, 19);
+        TitularCuenta titular = new TitularCuenta("Carlos", 12345678, 19);
         Cuenta cuenta = new Cuenta(1001, 0.0, titular);
         System.out.println("Cuenta creada: " + cuenta);
         

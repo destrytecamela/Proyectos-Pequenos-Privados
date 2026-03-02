@@ -1,21 +1,18 @@
-package Cuenta;
-
-import Cuenta.Persona;
 public class Cuenta {
 private long numero;
 private double saldo;
-private Persona titular;  //Composicion unaria
+private TitularCuenta titular;  //Composicion unaria
 private Movimiento[] movs;//composicion n-aria
 
 //Constructores
 public Cuenta() {
     numero = 0;
     saldo = 0.0;
-    titular = new Persona();
+    titular = new TitularCuenta();
     movs = new Movimiento[100]; //Ejemplo de array para almacenar movimientos
 }
 
-public Cuenta(long n, double s, Persona t) {
+public Cuenta(long n, double s, TitularCuenta t) {
     numero = n;
     saldo = s;
     titular = t;
@@ -29,7 +26,7 @@ public long getNumero() {
 public double getSaldo() {
     return saldo;
 }
-public Persona getTitular() {
+public TitularCuenta getTitular() {
     return titular;
 }
 public Movimiento[] getMovs() {
@@ -42,7 +39,7 @@ public void setNumero(long n) {
 public void setSaldo(double s) {
     saldo = s;
 }
-public void setTitular(Persona t) {
+public void setTitular(TitularCuenta t) {
     titular = t;
 }
 public void setMovs(Movimiento[] m) {

@@ -5,7 +5,7 @@
  * @author EDI
  * @version 1.0
  */
-public class Persona {
+public class TitularCuenta {
 
     // Atributos
     /** Nombre de la persona.*/
@@ -20,7 +20,7 @@ public class Persona {
     /**
      * Crea una persona con valores por defecto.
      */
-    public Persona() { // CD
+    public TitularCuenta() { // CD
         nombre = "";
         dni = -1;
         edad = 0;
@@ -32,7 +32,7 @@ public class Persona {
      * @param s nombre de la persona; 
      * @param d DNI sin letra (solo números)
      */
-    public Persona(String s, int d) {
+    public TitularCuenta(String s, int d) {
         nombre = s;
         dni = d;
         edad = 0;
@@ -45,7 +45,7 @@ public class Persona {
      * @param d DNI sin letra (solo números)
      * @param e edad en años (no negativa)
      */
-    public Persona(String s, int d, int e) {
+    public TitularCuenta(String s, int d, int e) {
         nombre = s;
         dni = d;
         edad = e;
@@ -128,7 +128,7 @@ public class Persona {
     public boolean equals(Object o) {
         if (this == o) return true; // Mismo objeto
         if (o == null || getClass() != o.getClass()) return false; // No es una Persona
-        Persona persona = (Persona) o; // Cast seguro
+        TitularCuenta persona = (TitularCuenta) o; // Cast seguro
         return dni == persona.dni && nombre.equals(persona.nombre); // Comparar por nombre y DNI
     }
 
