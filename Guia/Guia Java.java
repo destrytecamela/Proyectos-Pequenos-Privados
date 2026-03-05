@@ -122,6 +122,26 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         for (int i = 0; i < cuentas.length; i++) { //se recorre el array de cuentas desde la posición 0 hasta la posición cuentas.length-1
             System.out.println(cuentas[i].toString()); //se muestra la información de cada cuenta utilizando el método toString
         }
+
+        //inconveniente del polimorfismo
+        //no se puede acceder directamente a los metodos especificos de cada clase hija
+        //por ejemplo, si queremos acceder al porcentaje de incremento de una CuentaJoven, no podemos hacerlo directamente desde el array de cuentas porque el tipo del array es Cuenta, que no tiene ese método. 
+        // Para solucionar esto, tendríamos que hacer un casting a CuentaJoven para poder acceder a ese método específico, lo cual puede ser peligroso si no se verifica previamente que el objeto realmente es una instancia de CuentaJoven.
+        //Ejemplo:
+        Cuenta cuenta = cuentas[0]; //se asigna la primera cuenta del array a una variable de tipo Cuenta
+        if (cuenta instanceof CuentaJoven) { //se verifica si la cuenta es una instancia de CuentaJoven
+            CuentaJoven cuentaJoven = (CuentaJoven) cuenta; //se hace un casting a CuentaJoven para poder acceder a sus métodos específicos
+            System.out.println("Porcentaje de incremento al ingresar: " + cuentaJoven.getPorcentaje()); //se muestra el porcentaje de incremento al ingresar de la cuenta joven
+        } else {
+            System.out.println("La cuenta no es una CuentaJoven"); //si la cuenta no es una instancia de CuentaJoven, se muestra un mensaje indicando que no se puede acceder al método específico
+        }
+        //tambien se puede usar getClass() para verificar el tipo de la cuenta antes de hacer el casting, lo cual es más seguro:
+        if (cuenta.getClass() == CuentaJoven.class) { //se verifica si la clase de la cuenta es exactamente CuentaJoven
+            CuentaJoven cuentaJoven = (CuentaJoven) cuenta; //se hace un casting a CuentaJoven para poder acceder a sus métodos específicos
+            System.out.println("Porcentaje de incremento al ingresar: " + cuentaJoven.getPorcentaje()); //se muestra el porcentaje de incremento al ingresar de la cuenta joven
+        } else {
+            System.out.println("La cuenta no es una CuentaJoven"); //si la cuenta no es una instancia de CuentaJoven, se muestra un mensaje indicando que no se puede acceder al método específico
+        }
         //------------------------------------------------------------------------
         
         //1ºEjemplo

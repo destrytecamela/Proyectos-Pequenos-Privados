@@ -97,5 +97,33 @@ public class MainCuenta
         System.out.println("La cuenta con mayor saldo es: "+v[w].toString());
 
         System.out.println(" ");
+
+        //inconveniende del polimorfismo y solucion
+        int contj=0;
+        for(int i=0; i<v.length;i++){
+            if(v[i] instanceof CuentaJoven){
+                contj++;
+                //mostrar porcentaje --> upcasting
+                CuentaJoven aux=(CuentaJoven) v[i];
+                aux.getPorcentaje();
+                 
+                
+            }
+        }
+        System.out.println("Número de cuentas jóvenes: " + contj);
+
+        //inconveniente del polimorfismo y solucion getclass
+        int contj2=0;
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                if(v[i].getClass()==CuentaJoven.class){
+                    contj2++;
+                    //mostrar porcentaje --> upcasting
+                    CuentaJoven aux=(CuentaJoven) v[i];
+                    aux.getPorcentaje();
+                }
+            }
+        }
+        System.out.println("Número de cuentas jóvenes (con getClass): " + contj2);
     }
 }
