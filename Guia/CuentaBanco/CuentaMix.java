@@ -72,10 +72,5 @@ public class CuentaMix extends Cuenta {
         ", porcentaje de reiro " + porcentajeret + "]";  
     }
     
-    @Override
-    public boolean equals(Object o){
-      CuentaMix aux=(CuentaMix) o;
-      if (this.numero==aux.getNumero()) return true;
-      else return false;
-    }
+ 
 }

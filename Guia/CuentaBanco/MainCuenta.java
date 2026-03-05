@@ -1,25 +1,38 @@
-import java.io.*;
 
 /**
- * Ejemplo de clase Cuenta con un titular.
+ * Clase main para las cuentas, aqui interactuamos con ellas creandolas y haciendo operaciones.
  * 
- * @author EDI
+ * @author Carlos 
  * @version 1.0
  */
-
-public class MainCuenta {
-    //main
-    public static void main(String[] args) throws IOException {
-        // Crear una cuenta con un titular
-        TitularCuenta titular = new TitularCuenta("Carlos", 12345678, 19);
-        Cuenta cuenta = new Cuenta(1001, 0.0, titular);
-        System.out.println("Cuenta creada: " + cuenta);
+public class MainCuenta
+{
+    public static void main(String[] args) {
+        Cuenta c1= new CuentaNormal();
+        Cuenta c2= new CuentaJoven();
+        Cuenta c3= new CuentaAhorros();
+        Cuenta c4= new CuentaMix();
         
-        // Realizar algunos movimientos
-        cuenta.ingresar(500.00f);
-        cuenta.retirar(200.00f);
-        cuenta.retirar(400.00f); // Intento de retirar más de lo disponible
+        c1.ingresar(500);
+        c2.ingresar(500);
+        c3.ingresar(500);
+        c4.ingresar(500);
         
-        System.out.println(cuenta.toString());
+        System.out.println(c1.toString());
+        System.out.println(c2.toString());
+        System.out.println(c3.toString());
+        System.out.println(c4.toString());
+        
+        c1.retirar(100);
+        c2.retirar(100);
+        c3.retirar(100);
+        c4.retirar(100);
+        
+        System.out.println(c1.toString());
+        System.out.println(c2.toString());
+        System.out.println(c3.toString());
+        System.out.println(c4.toString());
+        
+        
     }
 }

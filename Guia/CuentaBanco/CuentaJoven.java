@@ -57,11 +57,5 @@ public class CuentaJoven extends Cuenta {
         return "CuentaJoven[numero=" + numero + ", saldo=" + saldo + ", titular=" + titular.getNombre() + ", porcentaje=" + porcentaje + "]";  
     }
     
-    @Override
-    public boolean equals(Object o){
-      CuentaJoven aux=(CuentaJoven) o;
-      if (this.numero==aux.getNumero()) return true;
-      else return false;
     }
-}
     

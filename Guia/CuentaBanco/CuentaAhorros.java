@@ -1,6 +1,6 @@
 
 /**
- * Clase CuentaAhorros, hereda de Cuenta, representa una cuenta de ahorros con un porcentaje de incremento al retirar
+ * 
  * 
  * @author Carlos
  * @version 1.0
@@ -44,7 +44,7 @@ public class CuentaAhorros extends Cuenta {
      * @return True si es correcto y falso en caso contrario
      */
     
-    public boolean ingresar(float p){
+    public boolean retirar(float p){
         float cantidad = p+p*porcentaje;
         return super.retirar(cantidad);
         
@@ -55,10 +55,5 @@ public class CuentaAhorros extends Cuenta {
         return "CuentaAhorros[numero=" + numero + ", saldo=" + saldo + ", titular=" + titular.getNombre() + ", porcentaje=" + porcentaje + "]";  
     }
     
-    @Override
-    public boolean equals(Object o){
-      CuentaJoven aux=(CuentaJoven) o;
-      if (this.numero==aux.getNumero()) return true;
-      else return false;
-    }
+  
 }
