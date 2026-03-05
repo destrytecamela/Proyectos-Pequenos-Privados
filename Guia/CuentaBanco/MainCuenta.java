@@ -7,6 +7,9 @@
  */
 public class MainCuenta
 {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Cuenta c1= new CuentaNormal();
         Cuenta c2= new CuentaJoven();
@@ -23,6 +26,8 @@ public class MainCuenta
         System.out.println(c3.toString());
         System.out.println(c4.toString());
         
+        System.out.println(" ");
+        
         c1.retirar(100);
         c2.retirar(100);
         c3.retirar(100);
@@ -32,7 +37,65 @@ public class MainCuenta
         System.out.println(c2.toString());
         System.out.println(c3.toString());
         System.out.println(c4.toString());
+        System.out.println(" ");
+        System.out.println("Vectores de cuentas");
+        System.out.println(" ");
         
+        //ahora con array
+        Cuenta[]v=new Cuenta[10];
+        v[0]=c1;
+        v[1]=c2;
+        v[2]=c3;
+        v[3]=c4;
         
+        //ingresar
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                v[i].ingresar(500);
+            }
+        }
+        //mostrar
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                System.out.println(v[i].toString());
+            }
+        }
+        //retirar
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                v[i].retirar(100);
+            }
+        }
+        //mostrar
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                System.out.println(v[i].toString());
+            }
+        }
+        System.out.println(" ");
+        //media de saldo
+        double media=0;
+        int cont=0;
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                media=media+v[i].getSaldo();
+                cont++;
+            }
+        }
+        System.out.println("La media de saldo es: "+media/cont);
+
+        System.out.println(" ");
+        //cuenta con mayor saldo
+        int w=0;
+        for(int i=0; i<v.length;i++){
+            if(v[i]!=null){
+                if(v[i].getSaldo()>v[w].getSaldo()){
+                    w=i;
+                }
+            }
+        }
+        System.out.println("La cuenta con mayor saldo es: "+v[w].toString());
+
+        System.out.println(" ");
     }
 }

@@ -24,7 +24,7 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         
         
          // Leer mediante Scanner
-          Scanner in = new Scanner (System.in) ; //Otro mecanismo de lectura
+          Scanner in = new Scanner (System.in); //Otro mecanismo de lectura
           //Leer cadenas
           String s= int.nextLine(); //se lee una línea de texto por teclado y se almacena en la variable s
           System.out.println(s); //se muestra la cadena leída por teclado
@@ -109,6 +109,19 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         LocalDate fechaIntroducida = LocalDate.parse(s, formato); //se convierte la cadena s a un objeto de tipo LocalDate utilizando el formato definido y se almacena en la variable fechaIntroducida
         System.out.println("Fecha introducida: " + fechaIntroducida.format(formato)); //se muestra la fecha introducida formateada
         
+        //polimorfismo y herencia
+        //los archivos Cuenta.java, CuentaJoven.java, CuentaAhorros.java y CuentaMix.java son un ejemplo de esto,
+        //donde se define una clase abstracta Cuenta con atributos como numero, saldo, titular y movs, y métodos para ingresar, retirar y añadir movimientos. Luego, se definen tres clases que heredan de Cuenta: CuentaJoven, CuentaAhorros y CuentaMix, cada una con sus propios atributos y métodos que redefinen los métodos de la clase Cuenta para implementar comportamientos específicos. 
+        // En el archivo Prueba.java se pueden crear objetos de cada tipo de cuenta y llamar a sus métodos para ver cómo funcionan.
+
+        //array poliformico
+        Cuenta[] cuentas = new Cuenta[3]; //se declara un array de tipo Cuenta con capacidad para 3 elementos
+        cuentas[0] = new CuentaJoven(12345, 1000, new TitularCuenta("Juan", "Pérez", "12345678A", LocalDate.of(2005, 5, 15)), 0.05f); //se crea un objeto de tipo CuentaJoven y se asigna a la posición 0 del array
+        cuentas[1] = new CuentaAhorros(54321, 2000, new TitularCuenta("María", "Gómez", "87654321B", LocalDate.of(1990, 10, 20)), 0.02f); //se crea un objeto de tipo CuentaAhorros y se asigna a la posición 1 del array
+        cuentas[2] = new CuentaMix(67890, 1500, new TitularCuenta("Carlos", "López", "11223344C", LocalDate.of(1985, 3, 30)), 0.03f, 0.01f); //se crea un objeto de tipo CuentaMix y se asigna a la posición 2 del array
+        for (int i = 0; i < cuentas.length; i++) { //se recorre el array de cuentas desde la posición 0 hasta la posición cuentas.length-1
+            System.out.println(cuentas[i].toString()); //se muestra la información de cada cuenta utilizando el método toString
+        }
         //------------------------------------------------------------------------
         
         //1ºEjemplo
