@@ -1,10 +1,10 @@
 
 
-public class Cuenta {
-private long numero;
-private double saldo;
-private TitularCuenta titular;  //Composicion unaria
-private Movimiento[] movs;//composicion n-aria
+public abstract class Cuenta {
+protected  long numero;
+protected  double saldo;
+protected TitularCuenta titular;  //Composicion unaria
+protected Movimiento[] movs;//composicion n-aria
 
 //Constructores
 public Cuenta() {
