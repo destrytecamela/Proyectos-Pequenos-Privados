@@ -1,4 +1,4 @@
-
+import java.time.LocalDate;
 /**
  * Write a description of class Banco here.
  * 
@@ -81,16 +81,104 @@ public class Banco
         return false;
     }
 
-    //transferir dinero de una cuenta a otra
+    //transferir dinero de una cuenta a otra si no se puede ingresar o retirar no cambia nada
     public boolean transferir(long numeroCuentaOrigen, long numeroCuentaDestino, float cantidad){
         Cuenta cOrigen=buscarCuenta(numeroCuentaOrigen);
         Cuenta cDestino=buscarCuenta(numeroCuentaDestino);
         if(cOrigen!=null && cDestino!=null){
-            if(cOrigen.retirar(cantidad)){
+            if(cOrigen.getSaldo()>=cantidad){
+                cOrigen.retirar(cantidad);
                 cDestino.ingresar(cantidad);
                 return true;
             }
         }
         return false;
+    }
+    //contar cuentas que posee un titular con un DNI dado
+    public int contarCuentasPorDni(int DNI){
+        int x = 0;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                if(cuentas[i].getTitular().getDni()==DNI){
+                    x++;
+                }
+            }
+        } 
+        return x;
+    }
+
+    //contar saldos negativos
+    public int contarSaldosNegativos(){
+        int x = 0;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                if(cuentas[i].getSaldo()<0){
+                    x++;
+                }
+            }
+        } 
+        return x;
+    }
+
+    //saldo total de todas las cuentas
+    public float saldoTotal(){
+        float x = 0;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                x=x+cuentas[i].getSaldo();
+            }
+        } 
+        return x;
+    }
+
+    //contar cuentas jovenes
+    public int contarCuentasJovenes(){
+        int x = 0;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                if(cuentas[i] instanceof CuentaJoven){
+                    x++;
+                }
+            }
+        } 
+        return x;
+    }
+
+    //mostrar contador de cuentas jovenes
+    public void mostrarContadorCuentasJovenes(){
+        int x = contarCuentasJovenes();
+        System.out.println("El número de cuentas jovenes es: " + x);
+    }
+
+    //cuenta mayor saldo
+    public Cuenta cuentaMayorSaldo(){
+        Cuenta cMayor=null;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                if(cMayor==null || cuentas[i].getSaldo()>cMayor.getSaldo()){
+                    cMayor=cuentas[i];
+                }
+            }
+        } 
+        return cMayor;
+    }
+    //incrementar salarios(fecha) boolean
+    public void incrementarSalarios(LocalDate fecha){
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                if(cuentas[i] instanceof CuentaNomina){
+                    CuentaNomina aux=(CuentaNomina) cuentas[i];
+                    aux.incrementarSalario(fecha);
+                }
+            }
+        } 
+    }
+//listar cuentas
+    public void listarCuentas(){
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                System.out.println(cuentas[i].toString());
+            }
+        } 
     }
 }
