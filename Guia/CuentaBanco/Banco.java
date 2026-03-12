@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+
 /**
  * Write a description of class Banco here.
  * 
@@ -34,15 +35,9 @@ public class Banco
     public void setMaxCuentas(int maxCuentas) {
         this.maxCuentas = maxCuentas;
     }   
-     public Cuenta[] getCuentas() {
-        return cuentas;
-    }
-    public void setCuentas(Cuenta[] cuentas) {
-        this.cuentas = cuentas;
-    }
+    
     //funciones
-    //anadir una cuenta al banco
-    public boolean anadirCuenta(Cuenta c){
+      public boolean anadirCuenta(Cuenta c){
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]==null){
                 cuentas[i]=c;
@@ -51,6 +46,7 @@ public class Banco
         }
         return false;
     }
+    
     public Cuenta buscarCuenta(long numeroCuenta){
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
@@ -61,8 +57,7 @@ public class Banco
         }
         return null;
     }
-
-    //ingresar dinero a una cuenta
+    
     public boolean ingresar(long numeroCuenta, float cantidad){
         Cuenta c=buscarCuenta(numeroCuenta);
         if(c!=null){
@@ -71,7 +66,7 @@ public class Banco
         }
         return false;
     }
-    //retirar dinero de una cuenta
+    
     public boolean retirar(long numeroCuenta, float cantidad){
         Cuenta c=buscarCuenta(numeroCuenta);
         if(c!=null){
@@ -80,22 +75,20 @@ public class Banco
         }
         return false;
     }
-
-    //transferir dinero de una cuenta a otra si no se puede ingresar o retirar no cambia nada
+    
     public boolean transferir(long numeroCuentaOrigen, long numeroCuentaDestino, float cantidad){
         Cuenta cOrigen=buscarCuenta(numeroCuentaOrigen);
         Cuenta cDestino=buscarCuenta(numeroCuentaDestino);
         if(cOrigen!=null && cDestino!=null){
-            if(cOrigen.getSaldo()>=cantidad){
-                cOrigen.retirar(cantidad);
+            if(cOrigen.retirar(cantidad)){
                 cDestino.ingresar(cantidad);
                 return true;
             }
         }
         return false;
     }
-    //contar cuentas que posee un titular con un DNI dado
-    public int contarCuentasPorDni(int DNI){
+    
+     public int contarCuentasPorDni(int DNI){
         int x = 0;
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
@@ -106,9 +99,8 @@ public class Banco
         } 
         return x;
     }
-
-    //contar saldos negativos
-    public int contarSaldosNegativos(){
+    
+     public int contarSaldosNegativos(){
         int x = 0;
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
@@ -119,10 +111,9 @@ public class Banco
         } 
         return x;
     }
-
-    //saldo total de todas las cuentas
+    
     public float saldoTotal(){
-        float x = 0;
+        float x = 0.0F;
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
                 x=x+cuentas[i].getSaldo();
@@ -130,29 +121,26 @@ public class Banco
         } 
         return x;
     }
-
-    //contar cuentas jovenes
-    public int contarCuentasJovenes(){
-        int x = 0;
-        for(int i=0; i<cuentas.length;i++){
+    
+    public int contarCuentaJoven(){
+        int x =0;
+        for (int i = 0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
-                if(cuentas[i] instanceof CuentaJoven){
+                 if(cuentas[i] instanceof CuentaJoven){
                     x++;
                 }
             }
-        } 
+        }
         return x;
     }
-
-    //mostrar contador de cuentas jovenes
-    public void mostrarContadorCuentasJovenes(){
-        int x = contarCuentasJovenes();
+    
+    public void mostrarCuentaJoven(){
+        int x = contarCuentaJoven();
         System.out.println("El número de cuentas jovenes es: " + x);
     }
-
-    //cuenta mayor saldo
+    
     public Cuenta cuentaMayorSaldo(){
-        Cuenta cMayor=null;
+             Cuenta cMayor=null;
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
                 if(cMayor==null || cuentas[i].getSaldo()>cMayor.getSaldo()){
@@ -162,25 +150,29 @@ public class Banco
         } 
         return cMayor;
     }
-    //incrementar salarios(fecha) boolean
-    public void incrementarSalarios(LocalDate fecha){
+    
+    public boolean incrementarSalarios(LocalDate fecha){
+        boolean hecho=false;
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
                 if(cuentas[i] instanceof CuentaNomina){
                     CuentaNomina aux=(CuentaNomina) cuentas[i];
-                    aux.incrementarSalario(fecha);
+                    boolean hecho2=aux.incrementarSalario(fecha);
+                    hecho=hecho || hecho2;
                 }
             }
         } 
+        return hecho;
     }
-//listar cuentas
-    public void listarCuentas(){
+    
+     public void listarCuentas(){
         for(int i=0; i<cuentas.length;i++){
             if(cuentas[i]!=null){
                 System.out.println(cuentas[i].toString());
             }
         } 
     }
+    
     public int contarMov1K(){
         int Mov = 0;
         for(int i=0; i<cuentas.length;i++){
@@ -197,3 +189,4 @@ public class Banco
         return Mov;
     }
 }
+        
