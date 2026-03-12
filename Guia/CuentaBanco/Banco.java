@@ -181,4 +181,19 @@ public class Banco
             }
         } 
     }
+    public int contarMov1K(){
+        int Mov = 0;
+        for(int i=0; i<cuentas.length;i++){
+            if(cuentas[i]!=null){
+                for (int h=0; h<cuentas[i].getMovs().length;h++){
+                    if(cuentas[i].getMovs()[h]!=null){
+                        if(cuentas[i].getMovs()[h].getCantidad()>=1000){
+                            Mov++;
+                        }
+                    }
+                }
+            }
+        }
+        return Mov;
+    }
 }
