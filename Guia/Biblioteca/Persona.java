@@ -1,5 +1,3 @@
-package Biblioteca;
-
 public abstract class Persona {
     // Atributos comunes a todas las personas
     protected int id;
