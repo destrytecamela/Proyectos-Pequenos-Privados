@@ -3,7 +3,7 @@ public class mainBanco {
     public static void main(String[] args) {
         //creamos 2 bancos con un maximo de 1000 cuentas
         Banco b1=new Banco("Banco de Extremadura",1000);
-        Banco b2=new Banco("Sucursales de Extremadura",1000);
+        //Banco b2=new Banco("Sucursales de Extremadura",1000);
 
         //creamos 2 cuentas una joven y otra de ahorros
         Cuenta c1=new CuentaJoven(1,1000,new TitularCuenta("Carlos Gomez",12345678,16),0.05F);

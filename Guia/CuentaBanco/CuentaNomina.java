@@ -57,12 +57,12 @@ public class CuentaNomina extends Cuenta{
                 "} " + super.toString();
     }
     //equals solo numero de cuenta
-     @Override
-    public boolean equals(Object o){
+     //@Override
+    /*public boolean equals(Object o){
        CuentaNomina aux=(CuentaNomina) o;
       if (this.numero==aux.getNumero()) return true;
       else return false;
-    }
+    }*/
     public boolean incrementarSalario(LocalDate fecha){ //cada dia 23 se incrementa el salario por el porcentaje
         if(fecha.getDayOfMonth()==23){
             double incremento=salario*porcentaje;
