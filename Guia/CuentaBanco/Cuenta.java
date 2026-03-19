@@ -25,7 +25,7 @@ public Cuenta(long n, float s, TitularCuenta t) {
 public long getNumero() {
     return numero;
 }
-public double getSaldo() {
+public float getSaldo() {
     return saldo;
 }
 public TitularCuenta getTitular() {
