@@ -11,5 +11,5 @@ public class mainBanco {
         //añadimos las cuentas al banco b1
         b1.anadirCuenta(c1);
         b1.anadirCuenta(c2);
-}
+    }
 }
