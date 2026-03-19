@@ -9,7 +9,7 @@ public class CuentaNormal extends Cuenta {
     public CuentaNormal(){
         super();
     }
-    public CuentaNormal(long numero, double saldo, TitularCuenta titular) {
+    public CuentaNormal(long numero, float saldo, TitularCuenta titular) {
         super(numero, saldo, titular);
     }
 }

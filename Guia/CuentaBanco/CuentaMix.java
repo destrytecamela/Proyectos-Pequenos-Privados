@@ -23,7 +23,7 @@ public class CuentaMix extends Cuenta {
      * @param pi Porcentaje de incremento al ingresar
      * @param pr Porcentaje de incremento al retirar
      */
-    public CuentaMix(long numero, double saldo, TitularCuenta titular,float pi,float pr) {
+    public CuentaMix(long numero, float saldo, TitularCuenta titular,float pi,float pr) {
         super(numero, saldo, titular);
         porcentajeing=pi;
         porcentajeret=pr;

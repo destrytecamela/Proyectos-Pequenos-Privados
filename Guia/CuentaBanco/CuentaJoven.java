@@ -22,7 +22,7 @@ public class CuentaJoven extends Cuenta {
      * @param titular Persona titular de la cuenta
      * @param p Porcentaje de increment al ingresar
      */
-    public CuentaJoven(long numero, double saldo, TitularCuenta titular, float p) {
+    public CuentaJoven(long numero, float saldo, TitularCuenta titular, float p) {
         super(numero, saldo, titular);
         porcentaje=p;
     }

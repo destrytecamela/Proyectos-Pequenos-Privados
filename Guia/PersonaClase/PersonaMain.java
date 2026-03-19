@@ -19,7 +19,7 @@ public class PersonaMain {
             int edad = scanner.nextInt();
             
             // Crear objeto Persona
-            Persona persona = new Persona(nombre, apellidos, dni, edad);
+            Persona1 persona = new Persona1(nombre, apellidos, dni, edad);
             
             // Imprimir resultado
             System.out.println("Nombre completo: " + persona.getNombreCompleto());

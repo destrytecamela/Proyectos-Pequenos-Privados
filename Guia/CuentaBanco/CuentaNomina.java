@@ -19,7 +19,7 @@ public class CuentaNomina extends Cuenta{
         dia=1;
         
     }
-    public CuentaNomina(long n, double s, TitularCuenta t,float s2,float p,int d){
+    public CuentaNomina(long n, float s, TitularCuenta t,float s2,float p,int d){
         super(n, s, t);
         salario=s2;
         porcentaje=p;

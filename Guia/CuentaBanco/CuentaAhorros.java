@@ -23,7 +23,7 @@ public class CuentaAhorros extends Cuenta {
      * @param titular Persona titular de la cuenta
      * @param p Porcentaje de incremento al retirar
      */
-    public CuentaAhorros(long numero, double saldo, TitularCuenta titular, float p) {
+    public CuentaAhorros(long numero, float saldo, TitularCuenta titular, float p) {
         super(numero, saldo, titular);
         porcentaje=p;
     }

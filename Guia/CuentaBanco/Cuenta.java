@@ -2,19 +2,19 @@
 
 public abstract class Cuenta {
 protected  long numero;
-protected  double saldo;
+protected  float saldo;
 protected TitularCuenta titular;  //Composicion unaria
 protected Movimiento[] movs;//composicion n-aria
 
 //Constructores
 public Cuenta() {
     numero = 0;
-    saldo = 0.0;
+    saldo = 0.0f;
     titular = new TitularCuenta();
     movs = new Movimiento[100]; //Ejemplo de array para almacenar movimientos
 }
 
-public Cuenta(long n, double s, TitularCuenta t) {
+public Cuenta(long n, float s, TitularCuenta t) {
     numero = n;
     saldo = s;
     titular = t;
@@ -38,7 +38,7 @@ public Movimiento[] getMovs() {
 public void setNumero(long n) {
     numero = n;
 }
-public void setSaldo(double s) {
+public void setSaldo(float s) {
     saldo = s;
 }
 public void setTitular(TitularCuenta t) {
