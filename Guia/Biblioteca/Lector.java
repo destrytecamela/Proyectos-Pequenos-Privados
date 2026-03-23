@@ -12,11 +12,11 @@ public class Lector extends Persona {
         this.prestamo = new Prestamo[10]; // Suponiendo un tamaño máximo de 10 préstamos
     }
     //Constructor con parámetros
-    public Lector(int id, String nombre, int edad, LocalDate fechaAlta, boolean penalizado, int tamanoPrestamo) {
+    public Lector(int id, String nombre, int edad, LocalDate fechaAlta, boolean penalizado,int tamanoPrestamos) {
         super(id, nombre, edad);
         this.fechaAlta = fechaAlta;
         this.penalizado = penalizado;
-        this.prestamo = new Prestamo[tamanoPrestamo];
+        this.prestamo = new Prestamo[tamanoPrestamos];
     }
     //Getters y setters
     public LocalDate getFechaAlta() {
