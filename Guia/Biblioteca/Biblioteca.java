@@ -71,9 +71,9 @@ public class Biblioteca {
     // (2) buscar persona por ID
     // =====================================================
     public Persona buscarPorId(int id) {
-        for (Persona persona : personas) {
-            if (persona != null && persona.getId() == id) {
-                return persona;
+        for (int i = 0; i < personas.length; i++) {
+            if (personas[i] != null && personas[i].getId() == id) {
+                return personas[i];
             }
         }
         return null; // Retorna null si no se encuentra la persona
@@ -83,8 +83,8 @@ public class Biblioteca {
     // =====================================================
     public int contarPersonas() {
         int contador = 0;
-        for (Persona persona : personas) {
-            if (persona != null) {
+        for (int i = 0; i < personas.length; i++) {
+            if (personas[i] != null) {
                 contador++;
             }
         }
@@ -94,9 +94,9 @@ public class Biblioteca {
     // (4) Registrar préstamo
     // =====================================================
         public boolean registrarPrestamo(int idLector, Prestamo prestamo) {
-            for (Persona persona : personas) {
-                if (persona != null && persona instanceof Lector && persona.getId() == idLector) {
-                    Lector lector = (Lector) persona;
+            for (int i = 0; i < personas.length; i++    ) {
+                if (personas[i] != null && personas[i] instanceof Lector && personas[i].getId() == idLector) {
+                    Lector lector = (Lector) personas[i];
                     return lector.anadirPrestamo(prestamo);
                 }
             }
@@ -110,9 +110,9 @@ public class Biblioteca {
             int sumaEdades = 0;
             int contador = 0;
 
-            for (Persona persona : personas) {
-                if (persona != null) {
-                    sumaEdades += persona.getEdad();
+            for (int i = 0; i < personas.length; i++) {
+                if (personas[i] != null) {
+                    sumaEdades += personas[i].getEdad();
                     contador++;
                 }
             }
@@ -123,8 +123,8 @@ public class Biblioteca {
     // =====================================================
         public int contarPorEdad(int edad) {
             int contador = 0;
-            for (Persona persona : personas) {
-                if (persona != null && persona.getEdad() == edad) {
+            for (int i = 0; i < personas.length; i++) {
+                if (personas[i] != null && personas[i].getEdad() == edad) {
                     contador++;
                 }
             }
@@ -134,13 +134,14 @@ public class Biblioteca {
     // (7) Media duración de préstamos de un lector
     // =====================================================
         public double calcularMediaDuracion(int idLector) {
-            for (Persona persona : personas) {
-                if (persona != null && persona instanceof Lector && persona.getId() == idLector) {
-                    Lector lector = (Lector) persona;
+            for (int i = 0; i < personas.length; i++) {
+                if (personas[i] != null && personas[i] instanceof Lector && personas[i].getId() == idLector) {
+                    Lector lector = (Lector) personas[i];
                     int totalDuracion = 0;
                     int contador = 0;
 
-                    for (Prestamo prestamo : lector.getPrestamos()) {
+                    for (int j = 0; j < lector.getPrestamos().length; j++) {
+                        Prestamo prestamo = lector.getPrestamos()[j];
                         if (prestamo != null) {
                             totalDuracion += prestamo.getDuracionDias();
                             contador++;
@@ -160,7 +161,8 @@ public class Biblioteca {
         for (Persona persona : personas) {
             if (persona != null && persona instanceof Lector) {
                 Lector lector = (Lector) persona;
-                for (Prestamo prestamo : lector.getPrestamos()) {
+                for (int j = 0; j < lector.getPrestamos().length; j++) {
+                    Prestamo prestamo = lector.getPrestamos()[j];
                     if (prestamo != null && prestamo.getBibliotecario() != null && prestamo.getBibliotecario().getId() == idBibliotecario) {
                         contador++;
                     }
@@ -176,12 +178,13 @@ public class Biblioteca {
         String nombreMayor = "";
         int mayorDuracion = 0;
 
-        for (Persona persona : personas) {
-            if (persona != null && persona instanceof Lector) {
-                Lector lector = (Lector) persona;
+        for (int i = 0; i < personas.length; i++) {
+            if (personas[i] != null && personas[i] instanceof Lector) {
+                Lector lector = (Lector) personas[i];
                 int totalDuracion = 0;
 
-                for (Prestamo prestamo : lector.getPrestamos()) {
+                for (int j = 0; j < lector.getPrestamos().length; j++) {
+                    Prestamo prestamo = lector.getPrestamos()[j];
                     if (prestamo != null) {
                         totalDuracion += prestamo.getDuracionDias();
                     }
@@ -218,6 +221,11 @@ public class Biblioteca {
 
             String line = sc.nextLine();
             op = Integer.parseInt(line);
+            while(op < 1 || op > 10) {
+                if (!cv) System.out.print("Opción no válida. Intente de nuevo: ");
+                line = sc.nextLine();
+                op = Integer.parseInt(line);
+            }
 
             switch (op) {
                 case 1:
