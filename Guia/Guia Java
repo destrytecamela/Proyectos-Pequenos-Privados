@@ -142,6 +142,45 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         } else {
             System.out.println("La cuenta no es una CuentaJoven"); //si la cuenta no es una instancia de CuentaJoven, se muestra un mensaje indicando que no se puede acceder al método específico
         }
+
+
+        //listas,cola...
+        //ejemplo de lista
+        List<String> lista = new ArrayList<>(); //se declara una lista de tipo String utilizando la clase ArrayList
+        lista.add("Elemento 1"); //se añade un elemento a la lista
+        lista.add("Elemento 2"); //se añade otro elemento a la lista
+        System.out.println("Elementos de la lista: " + lista); //se muestra el contenido de la lista
+        //ejemplo de cola
+        Queue<String> cola = new LinkedList<>(); //se declara una cola de tipo String utilizando la clase LinkedList
+        cola.offer("Elemento 1"); //se añade un elemento a la cola
+        cola.offer("Elemento 2"); //se añade otro elemento a la cola
+        System.out.println("Elementos de la cola: " + cola); //se muestra el contenido de la cola
+        //ejemplo de pila
+        Stack<String> pila = new Stack<>(); //se declara una pila de tipo String utilizando la clase Stack
+        pila.push("Elemento 1"); //se añade un elemento a la pila
+        pila.push("Elemento 2"); //se añade otro elemento a la pila
+        System.out.println("Elementos de la pila: " + pila); //se muestra el contenido de la pila
+
+        //hass,tree,hashmap...
+        //ejemplo de HashMap
+        HashMap<String, Integer> mapa = new HashMap<>(); //se declara un mapa de tipo String para las claves y Integer para los valores utilizando la clase HashMap
+        mapa.put("Clave 1", 10); //se añade una pareja clave-valor al mapa
+        mapa.put("Clave 2", 20); //se añade otra pareja clave-valor al mapa
+        System.out.println("Valor de la Clave 1: " + mapa.get("Clave 1")); //se obtiene el valor asociado a la clave "Clave 1" y se muestra
+        System.out.println("Valor de la Clave 2: " + mapa.get("Clave 2")); //se obtiene el valor asociado a la clave "Clave 2" y se muestra
+        //ejemplo de TreeMap    
+        TreeMap<String, Integer> arbol = new TreeMap<>(); //se declara un mapa ordenado de tipo String para las claves y Integer para los valores utilizando la clase TreeMap
+        arbol.put("Clave A", 30); //se añade una pareja clave-valor al mapa ordenado
+        arbol.put("Clave B", 40); //se añade otra pareja clave-valor al mapa ordenado
+        System.out.println("Valor de la Clave A: " + arbol.get("Clave A")); //se obtiene el valor asociado a la clave "Clave A" y se muestra
+        System.out.println("Valor de la Clave B: " + arbol.get("Clave B")); //se obtiene el valor asociado a la clave "Clave B" y se muestra
+        //ejemplo de HashSet    
+        HashSet<String> conjunto = new HashSet<>(); //se declara un conjunto de tipo String utilizando la clase HashSet
+        conjunto.add("Elemento 1"); //se añade un elemento al conjunto
+        conjunto.add("Elemento 2"); //se añade otro elemento al conjunto
+        System.out.println("Elementos del conjunto: " + conjunto); //se muestra el contenido del conjunto
+
+
         //------------------------------------------------------------------------
         
         //1ºEjemplo
