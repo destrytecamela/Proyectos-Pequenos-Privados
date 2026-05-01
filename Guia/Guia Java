@@ -180,6 +180,8 @@ public class Prueba{ //se declara la clase Prueba otros nombres pueden ser Main,
         conjunto.add("Elemento 2"); //se añade otro elemento al conjunto
         System.out.println("Elementos del conjunto: " + conjunto); //se muestra el contenido del conjunto
 
+        
+        
 
         //------------------------------------------------------------------------
         

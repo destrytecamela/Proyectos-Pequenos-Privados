@@ -163,9 +163,9 @@ public class Biblioteca {
     // =====================================================
     public int contarPrestamosGestionados(int idBibliotecario) {
         int contador = 0;
-        for (Persona persona : personas) {
-            if (persona != null && persona instanceof Lector) {
-                Lector lector = (Lector) persona;
+        for (int i = 0; i < personas.length; i++) {
+            if (personas != null && personas[i] instanceof Lector) {
+                Lector lector = (Lector) personas[i];
                 for (int j = 0; j < lector.getPrestamos().length; j++) {
                     Prestamo prestamo = lector.getPrestamos()[j];
                     if (prestamo != null && prestamo.getBibliotecario() != null
