@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class Biblioteca {
 
-    boolean cv = true;
+    boolean cv = false;
     private final Scanner sc = new Scanner(System.in);
     private Persona[] personas;
     private List<Libro> libros;
