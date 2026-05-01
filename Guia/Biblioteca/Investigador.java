@@ -34,7 +34,7 @@ public class Investigador extends Lector {
         return false;
     }
     return super.anadirPrestamo(prestamo);
-}
+    }   
 
     @Override
     public String toString() {

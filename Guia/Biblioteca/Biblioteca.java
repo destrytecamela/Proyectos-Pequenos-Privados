@@ -47,7 +47,7 @@ public class Biblioteca {
         String seccion = sc.nextLine();
         if (!cv) System.out.print("¿Es investigador? (true/false): ");
         boolean esInv = Boolean.parseBoolean(sc.nextLine());
-        nueva = new Bibliotecario(id, nombre, edad, seccion, esInv);
+        nueva = new Bibliotecario(id, nombre, edad, seccion, esInv);    
 
         } else if (tipo == 3) {
             if (!cv) System.out.print("Fecha de alta (YYYY-MM-DD): ");
