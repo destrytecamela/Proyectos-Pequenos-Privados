@@ -1,69 +1,61 @@
-public abstract class Persona {
-    // Atributos comunes a todas las personas
+public abstract class Persona{
+    //Atributos
     protected int id;
     protected String nombre;
     protected int edad;
-    // Constructor por defecto
-    public Persona() {
+    
+    //Constructor por defecto
+    public Persona(){
         this.id = 0;
-        this.nombre = "";
-        this.edad = 0;
+        this.nombre="";
+        this.edad=0;
     }
-    // Constructor con parámetros
-    public Persona(int id, String nombre, int edad) {
-        this.id = id;
-        this.nombre = nombre;
-        this.edad = edad;
+    //Constructor parametrizado
+    public Persona(int i,String n,int e){
+        this.id=i;
+        this.nombre=n;
+        this.edad=e;
     }
-    // Getters y setters
-    public int getId() {
+    
+    //Getters y Setters
+    public void setId(int i){
+        this.id=i;
+    }
+    public void setNombre(String n){
+        this.nombre=n;
+    }
+    public void setEdad(int e){
+        this.edad=e;
+    }
+    
+    public int getId(){
         return id;
     }
-
-    public String getNombre() {
+    public String getNombre(){
         return nombre;
     }
-
-    public int getEdad() {
+    public int getEdad(){
         return edad;
     }
-    public void setId(int id) {
-        this.id = id;
+    //toString
+    
+    public String toString(){
+        return "Persona{ "+"id: "+id+", nombre: "+nombre+", edad: "+edad+"}";
     }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-    //Metodos 
+    //equals
+    
+    
+    //Metodos
     public abstract boolean getSancionado();
     public String mostrarInformacion(){
-        return "ID: " + id + ", Nombre: " + nombre + ", Edad: " + edad;
+        return "ID: "+id+", Nombre: "+ ", Edad: "+edad;
     }
-
-    //ToString
-    @Override
-    public String toString() {
-        return "Persona{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                '}';
-    }
-    //equals solo de la id
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Persona persona = (Persona) obj;
-        return id == persona.id;
-    }
-
-    //metodo mostrarinformacion con toString
-    public String mostrarInformacionToString() {
-        return toString();
-    }
+   
+    
+    
+    
+    
+    
+    
+    
 }

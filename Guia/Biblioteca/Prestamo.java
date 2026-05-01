@@ -1,76 +1,63 @@
 import java.time.LocalDate;
-public class Prestamo {
-    //Atributos
+public class Prestamo{
+    //atributos
     private LocalDate fechaPrestamo;
     private int duracionDias;
     private boolean devuelto;
     private Bibliotecario bibliotecario;
-
-    //Constructor por defecto
-    public Prestamo() {
-        this.fechaPrestamo = LocalDate.now();
-        this.duracionDias = 0;
-        this.devuelto = false;
-        this.bibliotecario = new Bibliotecario();
+    
+    //constructor por defecto
+    public Prestamo(){
+        this.fechaPrestamo=LocalDate.now();
+        this.duracionDias=0;
+        this.devuelto=false;
+        this.bibliotecario=new Bibliotecario();
     }
-    //Constructor con parámetros
-    public Prestamo(LocalDate fechaPrestamo, int duracionDias, boolean devuelto, Bibliotecario bibliotecario) {
-        this.fechaPrestamo = fechaPrestamo;
-        this.duracionDias = duracionDias;
-        this.devuelto = devuelto;
-        this.bibliotecario = bibliotecario;
+    
+    //constructor por parametros
+    public Prestamo(LocalDate fechaPrestamo,int duracionDias,boolean devuelto, Bibliotecario b){
+        this.fechaPrestamo=fechaPrestamo;
+        this.duracionDias=duracionDias;
+        this.devuelto=devuelto;
+        this.bibliotecario=b;
     }
-
-    //Getters y setters
-    public LocalDate getFechaPrestamo() {
+    
+    //getters y setters
+    public LocalDate getFechaPrestamo(){
         return fechaPrestamo;
     }
-
-    public int getDuracionDias() {
+    public int getDuracionDias(){
         return duracionDias;
     }
-
-    public boolean getDevuelto() {
+    public boolean getDevuelto(){
         return devuelto;
     }
-
-    public Bibliotecario getBibliotecario() {
+    public Bibliotecario getBibliotecario(){
         return bibliotecario;
     }
-    public void setFechaPrestamo(LocalDate fechaPrestamo) {
-        this.fechaPrestamo = fechaPrestamo;
+    
+    public void setFechaPrestamo(LocalDate fechaPrestamo){
+        this.fechaPrestamo=fechaPrestamo;
     }
-
-    public void setDuracionDias(int duracionDias) {
-        this.duracionDias = duracionDias;
+    public void setDuracionDias(int duracionDias){
+        this.duracionDias=duracionDias;
     }
-
-    public void setDevuelto(boolean devuelto) {
-        this.devuelto = devuelto;
+    public void setDevuelto(boolean devuelto){
+        this.devuelto=devuelto;
     }
-
-    public void setBibliotecario(Bibliotecario bibliotecario) {
-        this.bibliotecario = bibliotecario;
+    public void setBibliotecario(Bibliotecario b){
+        this.bibliotecario=b;
     }
-    //Metodos   
-    @Override
-    public String toString() {
-        return "Prestamo{" +
-                "fechaPrestamo=" + fechaPrestamo +
-                ", duracionDias=" + duracionDias +
-                ", devuelto=" + devuelto +
-                ", bibliotecario=" + bibliotecario +
-                '}';
-    }
-    public boolean marcarDevuelto() {
-        if (!devuelto) {
-            devuelto = true;
+    //Metodos
+    public boolean marcarDevuelto(){
+        if(!devuelto){
+            devuelto=true;
             return true;
         }
         return false;
     }
-    public boolean asignarBibliotecario(Bibliotecario bibliotecario) {
-        if (this.bibliotecario == null || this.bibliotecario.getId() != bibliotecario.getId()) {
+    public boolean asignarBibliotecario(Bibliotecario bibliotecario){
+        if(this.bibliotecario==null||this.bibliotecario.getId()!=bibliotecario.getId()){
             this.bibliotecario = bibliotecario;
             return true;
         }

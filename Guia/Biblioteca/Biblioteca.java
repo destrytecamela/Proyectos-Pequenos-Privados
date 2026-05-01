@@ -1,205 +1,216 @@
+// ==========================
+// CLASE PRINCIPAL: BIBLIOTECA
+// ==========================
+import java.io.*;
 import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Biblioteca {
-    boolean cv = false;
+    boolean cv = true
+; // Variable de control para el menú. True cuando se suba VPL y false para pruebas locales
     private final Scanner sc = new Scanner(System.in);
     private Persona[] personas;
+    //TODO 
+    // agregar atributos necesarios para almacenar personas y constructores
+public Biblioteca(){
+    this.personas=new Persona[100];
+}
 
-    public Biblioteca() {
-        this.personas = new Persona[100];
-    }
+public Biblioteca(int x){
+    this.personas=new Persona[x];
+}
+    //TODO
+    //Agrear métodos necesarios para gestionar la biblioteca (añadir persona, buscar por ID, contar personas, registrar préstamo, etc.)
 
-    public Biblioteca(int tamano) {
-        this.personas = new Persona[tamano];
-    }
-
-    // =====================================================
-    // (1) AÑADIR PERSONA
+    // =====================================================        
+    // (1) AÑADIR PERSONA 
     // =====================================================
     public boolean anadirPersona() {
+        boolean h = false;
         if (!cv) {
             System.out.println("1. Lector");
             System.out.println("2. Bibliotecario");
-            System.out.println("3. Investigador");
             System.out.print("Tipo: ");
         }
-        int tipo = Integer.parseInt(sc.nextLine());
+        int tipo = Integer.parseInt(leerLinea());
 
         if (!cv) System.out.print("ID: ");
-        int id = Integer.parseInt(sc.nextLine());
+        int id = Integer.parseInt(leerLinea());
 
         if (!cv) System.out.print("Nombre: ");
-        String nombre = sc.nextLine();
+        String nombre = leerLinea();
 
         if (!cv) System.out.print("Edad: ");
-        int edad = Integer.parseInt(sc.nextLine());
-
-        Persona nueva = null;
+        int edad = Integer.parseInt(leerLinea());
 
         if (tipo == 1) {
-            if (!cv) System.out.print("Fecha de alta (YYYY-MM-DD): ");
-            LocalDate fechaAlta = LocalDate.parse(sc.nextLine());
-            nueva = new Lector(id, nombre, edad, fechaAlta, false, 10);
-
-        } else if (tipo == 2) {
-        if (!cv) System.out.print("Sección: ");
-        String seccion = sc.nextLine();
-        if (!cv) System.out.print("¿Es investigador? (true/false): ");
-        boolean esInv = Boolean.parseBoolean(sc.nextLine());
-        nueva = new Bibliotecario(id, nombre, edad, seccion, esInv);    
-
-        } else if (tipo == 3) {
-            if (!cv) System.out.print("Fecha de alta (YYYY-MM-DD): ");
-            LocalDate fechaAlta = LocalDate.parse(sc.nextLine());
-            if (!cv) System.out.print("Número máximo de préstamos simultáneos: ");
-            int numPrestamos = Integer.parseInt(sc.nextLine());
-            nueva = new Investigador(id, nombre, edad, fechaAlta, false, numPrestamos, numPrestamos);
-        }
-
-        if (nueva != null) {
-            for (int i = 0; i < personas.length; i++) {
-                if (personas[i] == null) {
-                    personas[i] = nueva;
-                    return true;
+            //TODO
+            if(!cv)System.out.print("Fecha de alta (YYYY-MM-DD): ");
+            LocalDate fechaAlta=LocalDate.parse(leerLinea());
+            boolean a=Boolean.parseBoolean(leerLinea());
+            Lector lector = new Lector(id,nombre,edad,fechaAlta,a,10);
+            for(int i=0;i<personas.length;i++){
+                if(personas[i]==null){
+                    personas[i]=lector;
+                    h=true;
+                    break;
+                }
+            }
+        } else {
+            //TODO
+            if(!cv)System.out.print("Seccion: ");
+            String seccion =leerLinea();
+            
+            Bibliotecario bibliotecario = new Bibliotecario(id,nombre,edad,seccion,false);
+            for(int i=0;i<personas.length;i++){
+                if(personas[i]==null){
+                    personas[i]=bibliotecario;
+                    h=true;
+                    break;
                 }
             }
         }
-        return false;
-    }
-
-    // =====================================================
-    // (2) BUSCAR PERSONA POR ID
-    // =====================================================
-    public Persona buscarPorId(int id) {
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i].getId() == id) {
-                return personas[i];
-            }
+        if (h==true){
+            System.out.println("Miembro añadido correctamente con id:"+id);
         }
-        return null;
-    }
+        
 
+        //TODO
+        return h;
+    }
     // =====================================================
-    // (3) CONTAR PERSONAS
+    // (2) Buscar personas por id
     // =====================================================
-    public int contarPersonas() {
-        int contador = 0;
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null) {
-                contador++;
+        public Persona buscarPorId(int id){
+            Persona h = null;
+            for(int i =0; i< personas.length; i++){
+                if(personas[i] != null && personas[i].getId() == id){
+                    h=personas[i];
+                }
             }
+            return h;
         }
-        return contador;
-    }
-
+    
     // =====================================================
-    // (4) REGISTRAR PRÉSTAMO
+    // (3) Contar personas por edad
     // =====================================================
-    public boolean registrarPrestamo(int idLector, Prestamo prestamo) {
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i] instanceof Lector && personas[i].getId() == idLector) {
-                Lector lector = (Lector) personas[i];
-                return lector.anadirPrestamo(prestamo);
+        public int contarPersonas(){
+            int contador=0;
+            for(int i = 0; i<personas.length;i++){
+                if(personas[i] != null){
+                    contador++;
+                }
             }
+            return contador;
         }
-        System.out.println("Lector no encontrado.");
-        return false;
-    }
-
     // =====================================================
-    // (5) CALCULAR PROMEDIO DE EDAD
+    // (4) Registrar préstamo
     // =====================================================
-    public double calcularPromedioDeEdad() {
-        int sumaEdades = 0;
-        int contador = 0;
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null) {
-                sumaEdades += personas[i].getEdad();
-                contador++;
+        public boolean registrarPrestamo(int idLector, Prestamo prestamo){
+            for(int i= 0;i<personas.length;i++){
+                if(personas[i] != null && personas[i] instanceof Lector && personas[i].getId() == idLector){
+                    Lector lector = (Lector) personas[i];
+                    return lector.anadirPrestamo(prestamo);
+                }
             }
+            return false;
         }
-        return contador > 0 ? (double) sumaEdades / contador : 0;
-    }
-
     // =====================================================
-    // (6) CONTAR POR EDAD
+    // (5) Calcular promedio de edad
     // =====================================================
-    public int contarPorEdad(int edad) {
-        int contador = 0;
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i].getEdad() == edad) {
-                contador++;
+        public double calcularPromedioEdad(){
+            int sumaedades= 0;
+            int contador=0;
+             for(int i= 0;i<personas.length;i++){
+                if(personas[i] != null){
+                    sumaedades = sumaedades+personas[i].getEdad();
+                    contador++;
+                }
             }
+        return (double) sumaedades/contador;
         }
-        return contador;
-    }
-
     // =====================================================
-    // (7) MEDIA DURACIÓN DE PRÉSTAMOS DE UN LECTOR
+    // (6) Contar por edad
     // =====================================================
-    public double calcularMediaDuracion(int idLector) {
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i] instanceof Lector && personas[i].getId() == idLector) {
-                Lector lector = (Lector) personas[i];
-                int totalDuracion = 0;
-                int contador = 0;
-                for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null) {
-                        totalDuracion += prestamo.getDuracionDias();
-                        contador++;
+        public int contarPorEdad(int edad){
+            int contador = 0;
+            for(int i= 0;i<personas.length;i++){
+                if(personas[i] != null && personas[i].getEdad() ==edad){
+                    contador++;
+                }
+            }
+            return contador;
+        }
+    // =====================================================
+    // (7) Media duración de préstamos de un lector
+    // =====================================================
+        public int calcularMediaDuracion(int idLec){
+            int media = 0;
+            for(int i = 0;i<personas.length;i++){
+                if(personas[i]!=null && personas[i] instanceof Lector && personas[i].getId()==idLec){
+                 Lector lector=(Lector) personas[i];
+                 int totalduracion=0;
+                 int contador=0;
+                 for(int j= 0; j<lector.getPrestamos().length;j++){
+                     Prestamo prestamo = lector.getPrestamos()[j];
+                     if(prestamo!=null&&prestamo.getDevuelto()){
+                         totalduracion=totalduracion+prestamo.getDuracionDias();
+                         contador++;
+                        }  
+                    }
+                    if(contador==0){return -1;}
+                    media=totalduracion/contador;
+                }
+            }
+            if(media==0){
+                media=-1;
+            }
+            return media;
+        }
+    // =====================================================
+    // (8) Prestamos gestionados por un bibliotecario
+    // =====================================================
+        public int contarPrestamosGestionados(int idBibliotecario){
+            int contador=0;
+            for(int i= 0;i<personas.length;i++){
+                if(personas[i] != null && personas[i] instanceof Lector){
+                    Lector lector=(Lector) personas[i];
+                    for (int j=0;j<lector.getPrestamos().length;j++){
+                        Prestamo prestamo = lector.getPrestamos()[j];
+                        if(prestamo != null && prestamo.getBibliotecario() != null && prestamo.getBibliotecario().getId()==idBibliotecario){
+                            contador++;
+                        }
                     }
                 }
-                return contador > 0 ? (double) totalDuracion / contador : 0;
             }
+            if(contador==0){
+                contador=-1;
+            }
+            return contador;
         }
-        System.out.println("Lector no encontrado.");
-        return 0;
-    }
-
     // =====================================================
-    // (8) PRÉSTAMOS GESTIONADOS POR UN BIBLIOTECARIO
+    // (9) Nombre del lector con mayor duración total de préstamos
     // =====================================================
-    public int contarPrestamosGestionados(int idBibliotecario) {
-        int contador = 0;
-        for (int i = 0; i < personas.length; i++) {
-            if (personas != null && personas[i] instanceof Lector) {
-                Lector lector = (Lector) personas[i];
-                for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null && prestamo.getBibliotecario() != null
-                            && prestamo.getBibliotecario().getId() == idBibliotecario) {
-                        contador++;
+        public String nombreMayorDuracion(){
+            String nombreMayor ="";
+            int mayorduracion =0;
+            for(int i= 0;i<personas.length;i++){
+                if(personas[i] != null && personas[i] instanceof Lector){
+                    Lector lector=(Lector) personas[i];
+                    int totalDuracion=0;
+                    for (int j=0;j<lector.getPrestamos().length;j++){
+                        Prestamo prestamo = lector.getPrestamos()[j];
+                        if(prestamo != null){
+                            totalDuracion=totalDuracion+prestamo.getDuracionDias();
+                        }
                     }
+                    if(totalDuracion>=mayorduracion){
+                    mayorduracion=totalDuracion;
+                    nombreMayor=lector.getNombre();
                 }
             }
         }
-        return contador;
-    }
-
-    // =====================================================
-    // (9) NOMBRE DEL LECTOR CON MAYOR DURACIÓN TOTAL
-    // =====================================================
-    public String nombreMayorDuracion() {
-        String nombreMayor = "";
-        int mayorDuracion = 0;
-        for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i] instanceof Lector) {
-                Lector lector = (Lector) personas[i];
-                int totalDuracion = 0;
-                for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null) {
-                        totalDuracion += prestamo.getDuracionDias();
-                    }
-                }
-                if (totalDuracion > mayorDuracion) {
-                    mayorDuracion = totalDuracion;
-                    nombreMayor = lector.getNombre();
-                }
-            }
-        }
+        if (mayorduracion==0){nombreMayor="N/A";}
         return nombreMayor;
     }
 
@@ -258,101 +269,89 @@ public class Biblioteca {
                 System.out.print("Opción: ");
             }
 
-            String line = sc.nextLine();
-            op = Integer.parseInt(line);
-            while (op < 1 || op > 12) {
-                if (!cv) System.out.print("Opción no válida. Intente de nuevo: ");
-                line = sc.nextLine();
-                op = Integer.parseInt(line);
+            String line = sc.nextLine().trim();
+            while (line.isEmpty()){
+                line=sc.nextLine().trim();
             }
+            op = Integer.parseInt(line);
+            
 
             switch (op) {
                 case 1:
                     anadirPersona();
                     break;
-
                 case 2:
-                    if (!cv) System.out.print("ID a buscar: ");
-                    int id = Integer.parseInt(sc.nextLine());
+                    if(!cv) System.out.print("ID a buscar: ");
+                    int id = Integer.parseInt(sc.next());
                     Persona persona = buscarPorId(id);
-                    if (persona != null) {
-                        System.out.println("Persona encontrada: " + persona);
-                    } else {
+                    if(persona != null){
+                        System.out.println("Persona encontrada: "+persona.getNombre());
+                    }
+                    else{
                         System.out.println("Persona no encontrada.");
                     }
                     break;
 
                 case 3:
-                    System.out.println("Total de personas: " + contarPersonas());
+                    System.out.println("Total personas: " + contarPersonas());
+                    
                     break;
 
                 case 4:
-                    if (!cv) System.out.print("ID del lector: ");
-                    int idLector = Integer.parseInt(sc.nextLine());
-
-                    Persona posibleLector = buscarPorId(idLector);
-                    if (posibleLector == null || !(posibleLector instanceof Lector)) {
-                        System.out.println("Lector no encontrado.");
-                        break;
+                    if (!cv){System.out.println("ID del lector: ");}
+                    int idLector=Integer.parseInt(leerLinea());
+                    Persona posiblelec = buscarPorId(idLector);
+                    if(posiblelec==null || !(posiblelec instanceof Lector)){
+                    System.out.println("Error: Lector no encontrado");
+                    break;
                     }
-
-                    if (!cv) System.out.print("Fecha de préstamo (YYYY-MM-DD): ");
-                    LocalDate fechaPrestamo = LocalDate.parse(sc.nextLine());
-                    if (!cv) System.out.print("Duración en días: ");
-                    int duracionDias = Integer.parseInt(sc.nextLine());
-
+                    if (!cv){System.out.println("Fecha de prestamo: ");}
+                    LocalDate fechaPrestamo = LocalDate.parse(leerLinea());
+                    if (!cv){System.out.println("Duracion en dias: ");}
+                    int duracionDias = Integer.parseInt(leerLinea());
+                    if (!cv){System.out.println("¿Devuelto?: true/false");}
+                    boolean devuelto = Boolean.parseBoolean(leerLinea());
                     Prestamo prestamo;
-
-                    if (posibleLector instanceof Investigador) {
-                        if (!cv) System.out.print("ID del bibliotecario: ");
-                        int idBib = Integer.parseInt(sc.nextLine());
-                        Persona posibleBib = buscarPorId(idBib);
-
-                        if (posibleBib == null || !(posibleBib instanceof Bibliotecario)) {
-                            System.out.println("Bibliotecario no encontrado.");
-                            break;
-                        }
-                        Bibliotecario bib = (Bibliotecario) posibleBib;
-                        prestamo = new Prestamo(fechaPrestamo, duracionDias, false, bib);
-                    } else {
-                        prestamo = new Prestamo(fechaPrestamo, duracionDias, false, null);
+                    
+                    if (!cv){System.out.println("ID del Bibliotecario: ");}
+                    int idBib=Integer.parseInt(leerLinea());
+                    Persona posibleBib = buscarPorId(idBib);
+                        
+                    if(posibleBib==null || !(posibleBib instanceof Bibliotecario)){
+                    System.out.println("Error.Bibliotecario no encontrado");
+                    break;
                     }
-
-                    boolean registrado = registrarPrestamo(idLector, prestamo);
-                    if (registrado) {
-                        System.out.println("Préstamo registrado con éxito.");
-                    } else {
-                        System.out.println("No se pudo registrar el préstamo.");
-                    }
+                    
+                    Bibliotecario Bib = (Bibliotecario) posibleBib;
+                    prestamo = new Prestamo(fechaPrestamo,duracionDias,devuelto,Bib);
+                    registrarPrestamo(idLector, prestamo);
+                    System.out.println("Bibliotecario: "+Bib.getNombre()+" Días: "+duracionDias);
                     break;
 
                 case 5:
-                    System.out.println("Promedio de edad: " + calcularPromedioDeEdad());
+                    System.out.println("Promedio edad: "+ String.format("%.2f",calcularPromedioEdad()));
                     break;
-
+                    
                 case 6:
-                    if (!cv) System.out.print("Edad a contar: ");
-                    int edadContar = Integer.parseInt(sc.nextLine());
-                    System.out.println("Total de personas con " + edadContar + " años: " + contarPorEdad(edadContar));
+                    if(!cv){System.out.println("Edad a contar: ");}
+                    int edad=Integer.parseInt(leerLinea());
+                    System.out.println("Total: "+contarPorEdad(edad));
                     break;
 
                 case 7:
-                    if (!cv) System.out.print("ID del lector: ");
-                    int idLectorDuracion = Integer.parseInt(sc.nextLine());
-                    System.out.println("Media de duración de préstamos para el lector con ID "
-                            + idLectorDuracion + ": " + calcularMediaDuracion(idLectorDuracion) + " días");
+                    if(!cv){System.out.println("ID lector: ");}
+                    int idlec=Integer.parseInt(leerLinea());
+                    System.out.println("Media duración: "+calcularMediaDuracion(idlec));
                     break;
 
                 case 8:
-                    if (!cv) System.out.print("ID del bibliotecario: ");
-                    int idBibliotecario = Integer.parseInt(sc.nextLine());
-                    System.out.println("Total de préstamos gestionados por el bibliotecario con ID "
-                            + idBibliotecario + ": " + contarPrestamosGestionados(idBibliotecario));
+                    if(!cv){System.out.println("Bibliotecario: ");}
+                    int idBib2=Integer.parseInt(leerLinea());
+                    System.out.println("Prestamos gestionados: "+contarPrestamosGestionados(idBib2));
                     break;
 
                 case 9:
-                    System.out.println("Nombre del lector con mayor duración total de préstamos: "
-                            + nombreMayorDuracion());
+                    System.out.println("Mayor duración: "+nombreMayorDuracion());
                     break;
 
                 case 10:
@@ -372,5 +371,12 @@ public class Biblioteca {
                     break;
             }
         } while (op != 10);
+    }
+        private String leerLinea(){
+        String linea =sc.nextLine().trim();
+        while (linea.isEmpty()){
+            linea=sc.nextLine().trim();
+        }
+        return linea;
     }
 }

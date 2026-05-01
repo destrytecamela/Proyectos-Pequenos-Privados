@@ -1,49 +1,42 @@
-public class Bibliotecario extends Persona {
-
+public class Bibliotecario extends Persona{
+    //Atributos
     private String seccion;
     private boolean esInvestigador;
-
-    // Constructor sin parámetros
-    public Bibliotecario() {
+    
+    //CD
+    public Bibliotecario (){
         super();
-        this.seccion = "";
-        this.esInvestigador = false;
+        this.seccion="";
+        this.esInvestigador=false;
     }
-
-    // Constructor original (compatibilidad con código existente)
-    public Bibliotecario(int id, String nombre, int edad, String seccion) {
-        super(id, nombre, edad);
-        this.seccion = seccion;
-        this.esInvestigador = false;
+    public Bibliotecario(int i, String n , int e, String s,boolean a){
+        super(i,n,e);
+        this.seccion=s;
+        this.esInvestigador=a;
     }
-
-    // Constructor completo
-    public Bibliotecario(int id, String nombre, int edad, String seccion, boolean esInvestigador) {
-        super(id, nombre, edad);
-        this.seccion = seccion;
-        this.esInvestigador = esInvestigador;
+    
+    //Getter
+    public String getSeccion(){
+        return seccion;
     }
-
-    // Getters y setters
-    public String getSeccion() { return seccion; }
-    public void setSeccion(String seccion) { this.seccion = seccion; }
-
-    public boolean getEsInvestigador() { return esInvestigador; }
-    public void setEsInvestigador(boolean esInvestigador) { this.esInvestigador = esInvestigador; }
-
+    public boolean getEsInvestigador(){
+        return esInvestigador;
+    }
+    //Setter
+    public void setSeccion(String s){
+        this.seccion = s;
+    }
+    public void setEsInvestigador(boolean a){
+        this.esInvestigador=a;
+    }
+    
+    //Metodo
     @Override
-    public String toString() {
-        return "Bibliotecario{" +
-                "seccion='" + seccion + '\'' +
-                ", esInvestigador=" + esInvestigador +
-                ", id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                '}';
+    public String toString(){
+        return "Bibliotecario{"+"Seccion: "+seccion+"Investigador: "+esInvestigador+", id: "+id+", nombre: "+nombre+", edad: "+edad+"}";
     }
-
     @Override
-    public boolean getSancionado() {
+    public boolean getSancionado(){
         return false;
     }
 }
