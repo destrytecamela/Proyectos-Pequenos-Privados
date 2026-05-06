@@ -19,7 +19,19 @@ public class Lector extends Persona {
     }
 
     /**
-     * Constructor parametrizado.
+     * Constructor parametrizado sin tamaño de array (usa 10 por defecto).
+     * @param id         Identificador único.
+     * @param nombre     Nombre del lector.
+     * @param edad       Edad del lector.
+     * @param fechaAlta  Fecha de registro en la biblioteca.
+     * @param penalizado true si está penalizado.
+     */
+    public Lector(int id, String nombre, int edad, LocalDate fechaAlta, boolean penalizado) {
+        this(id, nombre, edad, fechaAlta, penalizado, 10);
+    }
+
+    /**
+     * Constructor parametrizado completo.
      * @param id               Identificador único.
      * @param nombre           Nombre del lector.
      * @param edad             Edad del lector.

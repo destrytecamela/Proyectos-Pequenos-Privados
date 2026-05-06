@@ -14,14 +14,15 @@ import java.util.Scanner;
  */
 public class Biblioteca {
 
-    boolean cv = false;
-    private final Scanner sc = new Scanner(System.in);
+    boolean cv = true;
+    private Scanner sc;
     private Persona[] personas;
     private List<Libro> libros;
     private List<Prestamo> prestamos;
 
     /** Constructor por defecto. Capacidad de 100 personas. */
     public Biblioteca() {
+        this.sc        = new Scanner(System.in);
         this.personas  = new Persona[100];
         this.libros    = new LinkedList<>();
         this.prestamos = new ArrayList<>();
@@ -32,10 +33,26 @@ public class Biblioteca {
      * @param x Tamaño del array de personas.
      */
     public Biblioteca(int x) {
+        this.sc        = new Scanner(System.in);
         this.personas  = new Persona[x];
         this.libros    = new LinkedList<>();
         this.prestamos = new ArrayList<>();
     }
+
+    // =====================================================
+    // GETTERS DE LISTAS
+    // =====================================================
+    /**
+     * Devuelve la lista de libros del sistema.
+     * @return Lista de libros.
+     */
+    public List<Libro> getLibros() { return libros; }
+
+    /**
+     * Devuelve la lista de préstamos del sistema.
+     * @return Lista de préstamos.
+     */
+    public List<Prestamo> getPrestamos() { return prestamos; }
 
     // =====================================================
     // (1) AÑADIR PERSONA (menú)
@@ -68,13 +85,9 @@ public class Biblioteca {
             if (!cv) System.out.print("Fecha de alta (YYYY-MM-DD): ");
             LocalDate fechaAlta = LocalDate.parse(leerLinea());
             boolean penalizado = Boolean.parseBoolean(leerLinea());
-            Lector lector = new Lector(id, nombre, edad, fechaAlta, penalizado, 10);
+            Lector lector = new Lector(id, nombre, edad, fechaAlta, penalizado);
             for (int i = 0; i < personas.length; i++) {
-                if (personas[i] == null) {
-                    personas[i] = lector;
-                    h = true;
-                    break;
-                }
+                if (personas[i] == null) { personas[i] = lector; h = true; break; }
             }
         } else if (tipo == 2) {
             if (!cv) System.out.print("Seccion: ");
@@ -82,11 +95,7 @@ public class Biblioteca {
             boolean esInvestigador = Boolean.parseBoolean(leerLinea());
             Bibliotecario bibliotecario = new Bibliotecario(id, nombre, edad, seccion, esInvestigador);
             for (int i = 0; i < personas.length; i++) {
-                if (personas[i] == null) {
-                    personas[i] = bibliotecario;
-                    h = true;
-                    break;
-                }
+                if (personas[i] == null) { personas[i] = bibliotecario; h = true; break; }
             }
         } else if (tipo == 3) {
             if (!cv) System.out.print("Fecha de alta (YYYY-MM-DD): ");
@@ -94,19 +103,13 @@ public class Biblioteca {
             boolean penalizado = Boolean.parseBoolean(leerLinea());
             if (!cv) System.out.print("Num préstamos máximos: ");
             int numPrestamos = Integer.parseInt(leerLinea());
-            Investigador inv = new Investigador(id, nombre, edad, fechaAlta, penalizado, 10, numPrestamos);
+            Investigador inv = new Investigador(id, nombre, edad, fechaAlta, penalizado, numPrestamos);
             for (int i = 0; i < personas.length; i++) {
-                if (personas[i] == null) {
-                    personas[i] = inv;
-                    h = true;
-                    break;
-                }
+                if (personas[i] == null) { personas[i] = inv; h = true; break; }
             }
         }
 
-        if (h) {
-            System.out.println("Miembro añadido correctamente con id:" + id);
-        }
+        if (h) System.out.println("Miembro añadido correctamente con id:" + id);
         return h;
     }
 
@@ -120,10 +123,7 @@ public class Biblioteca {
      */
     public boolean anadirPersonaArgumentos(Persona p) {
         for (int i = 0; i < personas.length; i++) {
-            if (personas[i] == null) {
-                personas[i] = p;
-                return true;
-            }
+            if (personas[i] == null) { personas[i] = p; return true; }
         }
         return false;
     }
@@ -138,17 +138,13 @@ public class Biblioteca {
      */
     public Persona buscarPorId(int id) {
         for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i].getId() == id) {
-                return personas[i];
-            }
+            if (personas[i] != null && personas[i].getId() == id) return personas[i];
         }
         return null;
     }
 
-    /** Alias de buscarPorId para la nueva interfaz jUnit. */
-    public Persona buscarPersonaPorId(int id) {
-        return buscarPorId(id);
-    }
+    /** Alias de buscarPorId para la interfaz jUnit. */
+    public Persona buscarPersonaPorId(int id) { return buscarPorId(id); }
 
     // =====================================================
     // (3) CONTAR PERSONAS
@@ -192,17 +188,16 @@ public class Biblioteca {
      * Registra un préstamo buscando el libro por ISBN.
      * Si no hay stock, añade al lector a la cola de espera del libro.
      * Aplica las restricciones propias de los Investigadores.
-     *
      * @param id    Identificador del nuevo préstamo.
      * @param isbn  ISBN del libro solicitado.
      * @param idP   Identificador del lector.
      * @param fecha Fecha del préstamo.
      * @param idBib Identificador del bibliotecario gestor.
-     * @return true si el préstamo se registró (con stock), false en caso contrario.
+     * @return true si el préstamo se registró con stock, false en caso contrario.
      */
     public boolean registrarPrestamo(int id, String isbn, int idP,
                                      LocalDate fecha, int idBib) {
-        Libro libro = buscarLibroPorIsbn(isbn);
+        Libro libro = buscarLibroPorISBN(isbn);
         if (libro == null) return false;
 
         Persona posibleLector = buscarPorId(idP);
@@ -213,20 +208,17 @@ public class Biblioteca {
         if (posibleBib == null || !(posibleBib instanceof Bibliotecario)) return false;
         Bibliotecario bib = (Bibliotecario) posibleBib;
 
-        // Restricciones para Investigador
         if (lector instanceof Investigador) {
             Investigador inv = (Investigador) lector;
-            if (!bib.getEsInvestigador()) return false;
+            if (!bib.getSeccion().equals("Investigador")) return false;
             if (inv.contarPrestamosSinDevolver() >= inv.getNumPrestamos()) return false;
         }
 
         if (libro.getStock() <= 0) {
-            // Sin stock: añadir a cola de espera
             libro.anadirCola(lector);
             return false;
         }
 
-        // Hay stock: crear y registrar el préstamo
         Prestamo prestamo = new Prestamo(id, fecha, libro.getDiasPrestamo(),
                                          false, bib, libro, lector);
         libro.setStock(libro.getStock() - 1);
@@ -243,13 +235,9 @@ public class Biblioteca {
      * @return Promedio de edad como double.
      */
     public double calcularPromedioEdad() {
-        int sumaEdades = 0;
-        int contador   = 0;
+        int sumaEdades = 0, contador = 0;
         for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null) {
-                sumaEdades += personas[i].getEdad();
-                contador++;
-            }
+            if (personas[i] != null) { sumaEdades += personas[i].getEdad(); contador++; }
         }
         return (double) sumaEdades / contador;
     }
@@ -265,9 +253,7 @@ public class Biblioteca {
     public int contarPorEdad(int edad) {
         int contador = 0;
         for (int i = 0; i < personas.length; i++) {
-            if (personas[i] != null && personas[i].getEdad() == edad) {
-                contador++;
-            }
+            if (personas[i] != null && personas[i].getEdad() == edad) contador++;
         }
         return contador;
     }
@@ -284,13 +270,12 @@ public class Biblioteca {
         for (int i = 0; i < personas.length; i++) {
             if (personas[i] != null && personas[i] instanceof Lector
                     && personas[i].getId() == idLec) {
-                Lector lector = (Lector) personas[i];
-                int totalDuracion = 0;
-                int contador      = 0;
+                Lector lector     = (Lector) personas[i];
+                int totalDuracion = 0, contador = 0;
                 for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null && prestamo.getDevuelto()) {
-                        totalDuracion += prestamo.getDuracionDias();
+                    Prestamo p = lector.getPrestamos()[j];
+                    if (p != null && p.getDevuelto()) {
+                        totalDuracion += p.getDuracionDias();
                         contador++;
                     }
                 }
@@ -315,9 +300,9 @@ public class Biblioteca {
             if (personas[i] != null && personas[i] instanceof Lector) {
                 Lector lector = (Lector) personas[i];
                 for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null && prestamo.getBibliotecario() != null
-                            && prestamo.getBibliotecario().getId() == idBibliotecario) {
+                    Prestamo p = lector.getPrestamos()[j];
+                    if (p != null && p.getBibliotecario() != null
+                            && p.getBibliotecario().getId() == idBibliotecario) {
                         contador++;
                     }
                 }
@@ -336,17 +321,15 @@ public class Biblioteca {
      * @return Nombre del lector, o "N/A" si no hay ninguno con préstamos.
      */
     public String nombreMayorDuracion() {
-        String nombreMayor  = "";
-        int mayorDuracion   = 0;
+        String nombreMayor = "";
+        int mayorDuracion  = 0;
         for (int i = 0; i < personas.length; i++) {
             if (personas[i] != null && personas[i] instanceof Lector) {
-                Lector lector    = (Lector) personas[i];
+                Lector lector     = (Lector) personas[i];
                 int totalDuracion = 0;
                 for (int j = 0; j < lector.getPrestamos().length; j++) {
-                    Prestamo prestamo = lector.getPrestamos()[j];
-                    if (prestamo != null) {
-                        totalDuracion += prestamo.getDuracionDias();
-                    }
+                    Prestamo p = lector.getPrestamos()[j];
+                    if (p != null) totalDuracion += p.getDuracionDias();
                 }
                 if (totalDuracion >= mayorDuracion) {
                     mayorDuracion = totalDuracion;
@@ -372,8 +355,7 @@ public class Biblioteca {
      */
     public boolean anadirLibro(String tit, String autor, String isbn,
                                int stock, int diasP) {
-        Libro libro = new Libro(tit, autor, isbn, stock, diasP);
-        return libros.add(libro);
+        return libros.add(new Libro(tit, autor, isbn, stock, diasP));
     }
 
     // =====================================================
@@ -386,15 +368,11 @@ public class Biblioteca {
      * @return Número de préstamos marcados como devueltos, o -1 si el libro no existe.
      */
     public int eliminarLibro(String isbn) {
-        Libro libro = buscarLibroPorIsbn(isbn);
+        Libro libro = buscarLibroPorISBN(isbn);
         if (libro == null) return -1;
 
-        // Vaciar cola de espera
-        while (!libro.getCola().isEmpty()) {
-            libro.sacarCola();
-        }
+        while (!libro.getCola().isEmpty()) libro.sacarCola();
 
-        // Marcar como devueltos los préstamos no devueltos de este libro
         int marcados = 0;
         for (Prestamo p : prestamos) {
             if (p.getLibro() != null && p.getLibro().equals(libro) && !p.getDevuelto()) {
@@ -402,7 +380,6 @@ public class Biblioteca {
                 marcados++;
             }
         }
-
         libros.remove(libro);
         return marcados;
     }
@@ -412,8 +389,7 @@ public class Biblioteca {
     // =====================================================
     /**
      * Procesa la devolución de un préstamo. Penaliza al lector si se devuelve
-     * tarde. Incrementa el stock del libro. Si hay lectores en cola de espera,
-     * registra automáticamente un nuevo préstamo para el primero.
+     * tarde, incrementa el stock del libro y gestiona la cola de espera.
      * @param idPrestamo      Identificador del préstamo a devolver.
      * @param fechaDevolucion Fecha real de entrega.
      * @param idBib           Identificador del bibliotecario que gestiona la devolución.
@@ -422,39 +398,28 @@ public class Biblioteca {
     public boolean devolverPrestamo(int idPrestamo, LocalDate fechaDevolucion, int idBib) {
         Prestamo p = null;
         for (Prestamo pr : prestamos) {
-            if (pr.getId() == idPrestamo) {
-                p = pr;
-                break;
-            }
+            if (pr.getId() == idPrestamo) { p = pr; break; }
         }
         if (p == null) return false;
 
-        // Comprobar retraso
         long diasRetraso = ChronoUnit.DAYS.between(p.getFecha(), fechaDevolucion);
-        if (diasRetraso > p.getDuracionDias()) {
-            Lector lector = p.getLector();
-            if (lector != null) lector.setPenalizado(true);
+        if (diasRetraso > p.getDuracionDias() && p.getLector() != null) {
+            p.getLector().setPenalizado(true);
         }
 
         p.setDevuelto(true);
 
-        // Incrementar stock y registrar lector como lector del libro
         Libro libro = p.getLibro();
         if (libro != null) {
             libro.setStock(libro.getStock() + 1);
-            if (p.getLector() != null) {
-                libro.anadirLector(p.getLector());
-            }
+            if (p.getLector() != null) libro.anadirLector(p.getLector());
 
-            // Si hay lectores en cola, hacer un nuevo préstamo automático
             if (!libro.getCola().isEmpty()) {
                 Lector siguiente = libro.sacarCola();
-                int nuevoPrestId = prestamos.size() + 1;
-                registrarPrestamo(nuevoPrestId, libro.getIsbn(),
+                registrarPrestamo(prestamos.size() + 1, libro.getIsbn(),
                                   siguiente.getId(), fechaDevolucion, idBib);
             }
         }
-
         return true;
     }
 
@@ -483,8 +448,8 @@ public class Biblioteca {
     // =====================================================
     /**
      * Cuenta cuántos préstamos de una fecha concreta ha gestionado un bibliotecario.
-     * @param fecha  Fecha de los préstamos a filtrar.
-     * @param idBib  Identificador del bibliotecario.
+     * @param fecha Fecha de los préstamos a filtrar.
+     * @param idBib Identificador del bibliotecario.
      * @return Número de préstamos que coinciden con la fecha y el bibliotecario.
      */
     public int contarPrestamosDadaUnaFechaConBibliotecario(LocalDate fecha, int idBib) {
@@ -497,6 +462,11 @@ public class Biblioteca {
             }
         }
         return contador;
+    }
+
+    /** Alias del método anterior con el nombre exacto que usan los tests. */
+    public int contarPrestamosDadasUnaFechaConBibliotecario(LocalDate fecha, int idBib) {
+        return contarPrestamosDadaUnaFechaConBibliotecario(fecha, idBib);
     }
 
     // =====================================================
@@ -513,13 +483,16 @@ public class Biblioteca {
         for (Libro libro : libros) {
             if (libro.getDiasPrestamo() > duracion) {
                 for (Lector lector : libro.getLectores()) {
-                    if (lector.getPenalizado()) {
-                        contador++;
-                    }
+                    if (lector.getPenalizado()) contador++;
                 }
             }
         }
         return contador;
+    }
+
+    /** Alias del método anterior con el nombre exacto que usan los tests. */
+    public int contarLibrosMayorDuracioDadaConSusLectoresPenalizados(int duracion) {
+        return contarLibrosMayorDuracioDadaDeSusLectoresPenalizados(duracion);
     }
 
     // =====================================================
@@ -530,8 +503,8 @@ public class Biblioteca {
      * @return El libro con mayor cola, o null si no hay libros.
      */
     public Libro libroConMasColaEspera() {
-        Libro mayor = null;
-        int maxCola = -1;
+        Libro mayor  = null;
+        int maxCola  = -1;
         for (Libro libro : libros) {
             if (libro.getCola().size() > maxCola) {
                 maxCola = libro.getCola().size();
@@ -549,25 +522,20 @@ public class Biblioteca {
      * @return El libro con más préstamos registrados, o null si no hay libros.
      */
     public Libro libroConMasPrestamos() {
-        Libro mayor     = null;
+        Libro mayor      = null;
         int maxPrestamos = -1;
         for (Libro libro : libros) {
             int count = 0;
             for (Prestamo p : prestamos) {
-                if (p.getLibro() != null && p.getLibro().equals(libro)) {
-                    count++;
-                }
+                if (p.getLibro() != null && p.getLibro().equals(libro)) count++;
             }
-            if (count > maxPrestamos) {
-                maxPrestamos = count;
-                mayor        = libro;
-            }
+            if (count > maxPrestamos) { maxPrestamos = count; mayor = libro; }
         }
         return mayor;
     }
 
     // =====================================================
-    // (11) CONTAR TIPOS DE PERSONA
+    // (18) CONTAR TIPOS DE PERSONA
     // =====================================================
     /**
      * Imprime el número de bibliotecarios, lectores e investigadores registrados.
@@ -585,7 +553,7 @@ public class Biblioteca {
     }
 
     // =====================================================
-    // (12) INVESTIGADORES NO PENALIZADOS AL LÍMITE
+    // (19) INVESTIGADORES NO PENALIZADOS AL LÍMITE
     // =====================================================
     /**
      * Cuenta los investigadores que no están penalizados pero han alcanzado
@@ -614,11 +582,9 @@ public class Biblioteca {
      * @param isbn ISBN a buscar.
      * @return El libro encontrado, o null si no existe.
      */
-    private Libro buscarLibroPorIsbn(String isbn) {
+    public Libro buscarLibroPorISBN(String isbn) {
         for (Libro libro : libros) {
-            if (libro.getIsbn().equals(isbn)) {
-                return libro;
-            }
+            if (libro.getIsbn().equals(isbn)) return libro;
         }
         return null;
     }
@@ -648,9 +614,7 @@ public class Biblioteca {
             }
 
             String line = sc.nextLine().trim();
-            while (line.isEmpty()) {
-                line = sc.nextLine().trim();
-            }
+            while (line.isEmpty()) line = sc.nextLine().trim();
             op = Integer.parseInt(line);
 
             switch (op) {
@@ -661,11 +625,8 @@ public class Biblioteca {
                     if (!cv) System.out.print("ID a buscar: ");
                     int id = Integer.parseInt(sc.next());
                     Persona persona = buscarPorId(id);
-                    if (persona != null) {
-                        System.out.println("Persona encontrada: " + persona.getNombre());
-                    } else {
-                        System.out.println("Persona no encontrada.");
-                    }
+                    if (persona != null) System.out.println("Persona encontrada: " + persona.getNombre());
+                    else System.out.println("Persona no encontrada.");
                     break;
                 case 3:
                     System.out.println("Total personas: " + contarPersonas());
@@ -675,8 +636,7 @@ public class Biblioteca {
                     int idLector = Integer.parseInt(leerLinea());
                     Persona posiblelec = buscarPorId(idLector);
                     if (posiblelec == null || !(posiblelec instanceof Lector)) {
-                        System.out.println("Error: Lector no encontrado");
-                        break;
+                        System.out.println("Error: Lector no encontrado"); break;
                     }
                     if (!cv) System.out.println("Fecha de prestamo: ");
                     LocalDate fechaPrestamo = LocalDate.parse(leerLinea());
@@ -688,8 +648,7 @@ public class Biblioteca {
                     int idBib = Integer.parseInt(leerLinea());
                     Persona posibleBib = buscarPorId(idBib);
                     if (posibleBib == null || !(posibleBib instanceof Bibliotecario)) {
-                        System.out.println("Error.Bibliotecario no encontrado");
-                        break;
+                        System.out.println("Error.Bibliotecario no encontrado"); break;
                     }
                     Bibliotecario bib = (Bibliotecario) posibleBib;
                     Prestamo prestamo = new Prestamo(fechaPrestamo, duracionDias, devuelto, bib);
@@ -735,9 +694,7 @@ public class Biblioteca {
 
     private String leerLinea() {
         String linea = sc.nextLine().trim();
-        while (linea.isEmpty()) {
-            linea = sc.nextLine().trim();
-        }
+        while (linea.isEmpty()) linea = sc.nextLine().trim();
         return linea;
     }
 }

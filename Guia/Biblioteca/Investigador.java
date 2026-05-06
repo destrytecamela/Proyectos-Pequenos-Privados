@@ -16,7 +16,21 @@ public class Investigador extends Lector {
     }
 
     /**
-     * Constructor parametrizado.
+     * Constructor parametrizado sin tamaño de array (usa 10 por defecto).
+     * @param id           Identificador único.
+     * @param nombre       Nombre del investigador.
+     * @param edad         Edad.
+     * @param fechaAlta    Fecha de registro.
+     * @param penalizado   true si está penalizado.
+     * @param numPrestamos Límite máximo de préstamos sin devolver permitidos.
+     */
+    public Investigador(int id, String nombre, int edad, LocalDate fechaAlta,
+                        boolean penalizado, int numPrestamos) {
+        this(id, nombre, edad, fechaAlta, penalizado, 10, numPrestamos);
+    }
+
+    /**
+     * Constructor parametrizado completo.
      * @param id              Identificador único.
      * @param nombre          Nombre del investigador.
      * @param edad            Edad.
@@ -32,8 +46,8 @@ public class Investigador extends Lector {
     }
 
     // Getters y setters
-    public int getNumPrestamos()                { return numPrestamos; }
-    public void setNumPrestamos(int numPrestamos){ this.numPrestamos = numPrestamos; }
+    public int getNumPrestamos()                 { return numPrestamos; }
+    public void setNumPrestamos(int numPrestamos) { this.numPrestamos = numPrestamos; }
 
     /**
      * Calcula cuántos préstamos tiene el investigador sin devolver.

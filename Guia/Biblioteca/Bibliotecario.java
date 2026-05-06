@@ -16,7 +16,18 @@ public class Bibliotecario extends Persona {
     }
 
     /**
-     * Constructor parametrizado.
+     * Constructor parametrizado sin esInvestigador (false por defecto).
+     * @param i Identificador único.
+     * @param n Nombre.
+     * @param e Edad.
+     * @param s Sección en la que trabaja.
+     */
+    public Bibliotecario(int i, String n, int e, String s) {
+        this(i, n, e, s, false);
+    }
+
+    /**
+     * Constructor parametrizado completo.
      * @param i Identificador único.
      * @param n Nombre.
      * @param e Edad.
@@ -30,10 +41,10 @@ public class Bibliotecario extends Persona {
     }
 
     // Getters y setters
-    public String getSeccion()              { return seccion; }
-    public boolean getEsInvestigador()      { return esInvestigador; }
-    public void setSeccion(String s)        { this.seccion = s; }
-    public void setEsInvestigador(boolean a){ this.esInvestigador = a; }
+    public String getSeccion()               { return seccion; }
+    public boolean getEsInvestigador()       { return esInvestigador; }
+    public void setSeccion(String s)         { this.seccion = s; }
+    public void setEsInvestigador(boolean a) { this.esInvestigador = a; }
 
     @Override
     public boolean getSancionado() { return false; }
